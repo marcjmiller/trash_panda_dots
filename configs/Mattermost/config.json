@@ -1,0 +1,40 @@
+{
+  "version": 2,
+  "teams": [
+    {
+      "name": "IL2",
+      "url": "https://chat.il2.dso.mil",
+      "order": 0
+    },
+    {
+      "name": "IL4",
+      "url": "https://chat.il4.dso.mil",
+      "order": 1
+    },
+    {
+      "name": "IL5",
+      "url": "https://chat.il5.dso.mil",
+      "order": 2
+    },
+    {
+      "name": "GBSD",
+      "url": "https://chat.gbsd.fences.dso.mil",
+      "order": 4
+    }
+  ],
+  "showTrayIcon": true,
+  "trayIconTheme": "light",
+  "minimizeToTray": true,
+  "notifications": {
+    "flashWindow": 0,
+    "bounceIcon": true,
+    "bounceIconType": "informational"
+  },
+  "showUnreadBadge": true,
+  "useSpellChecker": true,
+  "enableHardwareAcceleration": true,
+  "autostart": true,
+  "spellCheckerLocale": "en-US",
+  "darkMode": true,
+  "downloadLocation": "~/Downloads"
+}
