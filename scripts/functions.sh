@@ -55,7 +55,7 @@ function queryBluetooth() {
 function getElevatedPermissions() {
   printf "\nRequesting elevated permissions to install software...\n"
   sudo -v
-  while true; do 
+  while true; do
     sudo -n true;
     sleep 60;
     kill -0 "$$" || exit;
@@ -64,8 +64,12 @@ function getElevatedPermissions() {
 
 function installPackages() {
   printf "Installing packages...\n"
+  echo "apt-get update"
+  # sudo sh -c "apt-get install ${join_by ' ' $PACKAGE_LIST}"
+  # join_by ' ' $PACKAGE_LIST
+  # echo "apt-get install ${PACKAGE_LIST}"
   for package in ${PACKAGE_LIST[@]}
   do
-    printf "  -> %s\n" $package
+    echo "apt-get install -qq ${package}"
   done
 }
