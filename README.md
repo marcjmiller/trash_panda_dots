@@ -24,4 +24,3 @@ Install: sh -c "$(curl -fsSL https://raw.githubusercontent.com/marcjmiller/trash
 - vs code
 - zoom
 - zsh
-

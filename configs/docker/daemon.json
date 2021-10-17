@@ -1,0 +1,5 @@
+{
+  "insecure-registries": [
+    "registry.gbsd.fences.dso.mil"
+  ]
+}

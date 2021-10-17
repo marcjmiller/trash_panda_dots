@@ -1,0 +1,11 @@
+[credential]
+	helper = store
+[http]
+	sslVerify = false
+[user]
+	email = EMAIL_CHANGEME
+	name = NAME_CHANGEME
+[init]
+	defaultBranch = main
+[core]
+  excludesFile = ~/.gitignore
