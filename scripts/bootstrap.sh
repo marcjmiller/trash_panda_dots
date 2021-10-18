@@ -3,31 +3,15 @@
 # Exit on any non-zero exit codes
 set -e
 
-# Default packages to install
-PACKAGE_LIST=(
-  apt-transport-https
-  brave-browser
-  ca-certificates
-  code
-  curl
-  fzf
-  git
-  gnupg
-  kitty
-  mattermost-desktop
-  maven
-  neovim
-  nodejs
-  npm
-  python3
-  slack
-  software-properties-common
-  wget
-  zsh
-)
-
 # Path to the script being executed
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+# Default packages to install
+PACKAGE_LIST=()
+readarray PACKAGE_LIST < $SCRIPT_DIR/packages.txt
+
+# Some starter Boolean vars, 0 = false, 1 = true
+IS_LAPTOP=0   # Whether installing on a laptop or not
 
 # Source all of our helper scripts
 source $SCRIPT_DIR/functions.sh
@@ -35,27 +19,42 @@ source $SCRIPT_DIR/install_packages.sh
 source $SCRIPT_DIR/terminal_setup.sh
 
 function main {
-  case "${1}" in
-    -v | --verbose)
-      printf "Running script in verbose mode\n"
-      set -x
+  printf "Parsing script args...\n"
+  for arg in "$@"; do
+    case "$arg" in
+      -v | --verbose)
+        printf " -> Running script in verbose mode\n"
+        set -x
+        ;;
+
+      -l | --laptop)
+        printf " -> Laptop install: adding tlp to package list\n"
+        IS_LAPTOP=1
+        PACKAGE_LIST=( ${PACKAGE_LIST[@]} tlp )
       ;;
 
-    *)
-      printf "Running script in regular mode\n"
-    ;;
-  esac
+      *)
+        continue
+      ;;
+    esac
+  done
+  printf "Done parsing script args\n"
 
-  # General machine Setup
+  ### General Setup ###
   setup
   install_packages
 
-  # Terminal Setup
+  ### Terminal Setup ###
   # installOhMyZsh
   # clonePlugins
   # updateZshConfig
 
-  # Link configs
+  ### Link configs ###
+
+  ### Script end ###
+  newline
+  printf "That's all folks!\n"
+  newline
 }
 
 main ${@}
