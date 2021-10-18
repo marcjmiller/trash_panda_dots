@@ -2,24 +2,24 @@
 
 ## Pipewire (Optional, better Bluetooth)
 ```
-sudo add-apt-repository ppa:pipewire-debian/pipewire-upstream  
-sudo apt install -y pipewire gstreamer1.0-pipewire libspa-0.2-{bluetooth,jack} pipewire-audio-client-libraries   
+sudo add-apt-repository ppa:pipewire-debian/pipewire-upstream
+sudo apt install -y pipewire gstreamer1.0-pipewire libspa-0.2-{bluetooth,jack} pipewire-audio-client-libraries
 
-systemctl --user daemon-reload   
-systemctl --user --now disable pulseaudio.{service,socket}  
-systemctl --user mask pulseaudio  
-systemctl --user --now enable pipewire-media-session.service  
+systemctl --user daemon-reload
+systemctl --user --now disable pulseaudio.{service,socket}
+systemctl --user mask pulseaudio
+systemctl --user --now enable pipewire-media-session.service
 
-sudo reboot  
+sudo reboot
 
-pactl info | grep "Server Name"  
+pactl info | grep "Server Name"
 
 Server Name: PulseAudio (on PipeWire 0.3.37)
-``` 
+```
 
 ## TLP (optional, Laptop Battery tool)
 ```
-sudo apt install -y tlp  
+sudo apt install -y tlp
 ```
 
 ## Brave Browser (Optional)
@@ -59,7 +59,7 @@ www.nerdfonts.com and pick a font that tickles your fancy, save it in ~/.fonts/<
 
 ## Install Powerlevel10k (optional)
 ```
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k  
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 # Set ZSH_THEME="powerlevel10k/powerlevel10k" in ~/.zshrc
 ```
@@ -71,9 +71,9 @@ git clone https://github.com/marcjmiller/trash_panda_dots
 
 ## Install VS Code (Alternatively use the [deb](https://code.visualstudio.com/Download) which adds the repo as well)
 ```
-echo "deb [arch=amd64,arm64,armhf] http://packages.microsoft.com/repos/code stable main" | sudo tee /etc/apt/sources.list.d/vscode.list  
+echo "deb [arch=amd64,arm64,armhf] http://packages.microsoft.com/repos/code stable main" | sudo tee /etc/apt/sources.list.d/vscode.list
 
-eval $(apt-config shell APT_TRUSTED_PARTS Dir::Etc::trustedparts/d)  
+eval $(apt-config shell APT_TRUSTED_PARTS Dir::Etc::trustedparts/d)
 
 echo "-----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: GnuPG v1.4.7 (GNU/Linux)
@@ -94,7 +94,7 @@ XdNgj4Jd2/g6T9InmWT0hASljur+dJnzNiNCkbn9KbX7J/qK1IbR8y560yRmFsU+
 NdCFTW7wY0Fb1fWJ+/KTsC4=
 =J6gs
 -----END PGP PUBLIC KEY BLOCK-----
-" | gpg --dearmor > $APT_TRUSTED_PARTS/microsoft.gpg  
+" | gpg --dearmor > $APT_TRUSTED_PARTS/microsoft.gpg
 
 sudo apt install -y code
 
@@ -102,38 +102,38 @@ sudo apt install -y code
 
 ## Kubernetes tools (Docker, Kubectl, K3d, Helm, Kustomize)
 ```
-sudo apt install -y gnupg lsb-release apt-transport-https ca-certificates  
+sudo apt install -y gnupg lsb-release apt-transport-https ca-certificates
 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg  
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null  
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-sudo apt install -y docker-ce docker-ce-cli containerd.io  
+sudo apt install -y docker-ce docker-ce-cli containerd.io
 
 sudo usermod -aG docker $(whoami)
 
-sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg  
+sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
 
-echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list  
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
-sudo apt update  
+sudo apt update
 
-sudo apt install -y kubectl  
+sudo apt install -y kubectl
 
-curl -s https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash  
+curl -s https://raw.githubusercontent.com/rancher/k3d/main/install.sh | bash
 
-k3d completion zsh > $ZSH_CUSTOM/plugins/k3d.zsh  
+k3d completion zsh > $ZSH_CUSTOM/plugins/k3d.zsh
 
-curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash  
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 
-curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash  
+curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
 
-sudo mv $HOME/kustomize /usr/local/bin  
+sudo mv $HOME/kustomize /usr/local/bin
 ```
 
 ## Apps install from .deb (Slack, Mattermost, AppGate SDP)
 ```
-sudo apt install -f *.deb  
+sudo apt install -f *.deb
 
 ```
 
