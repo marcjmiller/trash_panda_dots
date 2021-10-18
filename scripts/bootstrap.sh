@@ -24,13 +24,14 @@ PACKAGE_LIST=(
   software-properties-common
   wget
   zsh
-  )
+)
 
 # Path to the script being executed
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 # Source all of our helper scripts
 source $SCRIPT_DIR/functions.sh
+source $SCRIPT_DIR/install_packages.sh
 source $SCRIPT_DIR/terminal_setup.sh
 
 function main {
@@ -47,12 +48,12 @@ function main {
 
   # General machine Setup
   setup
-  installPackages
+  install_packages
 
   # Terminal Setup
-  installOhMyZsh
-  clonePlugins
-  updateZshConfig
+  # installOhMyZsh
+  # clonePlugins
+  # updateZshConfig
 
   # Link configs
 }

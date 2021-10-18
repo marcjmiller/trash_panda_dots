@@ -1,22 +1,24 @@
 #!/usr/bin/env bash
 
 checkOs() {
-  source /etc/lsb-release
+  local VALID_RELEASES=( 20.04 21.04 )
+  DIST=$(lsb_release -is)
+  VERSION=$(lsb_release -rs)
+  CODENAME=$(lsb_release -cs)
 
-  VALID_RELEASES=( 20.04 21.04 )
   printf "\nChecking OS and version...\n"
 
-  if [[ ! " $DISTRIB_ID " =~ " Ubuntu " ]]; then
+  if [[ ! "Ubuntu" =~ $DIST ]]; then
     printf "  Sorry, this script is only for Ubuntu\n"
     exit 1
   fi
 
-  if [[ ! " ${VALID_RELEASES[*]} " =~ " $DISTRIB_RELEASE " ]]; then
+  if [[ ! " ${VALID_RELEASES[*]} " =~ $VERSION ]]; then
     printf "  Sorry, only Ubuntu %s are supported\n"
     exit 1
   fi
 
-  printf "  Found %s\n" "$DISTRIB_DESCRIPTION"
+  printf "  Found %s\n" "$(lsb_release -ds)"
 }
 
 function setup() {
@@ -62,12 +64,3 @@ function getElevatedPermissions() {
   done 2>/dev/null &
 }
 
-function installPackages() {
-  printf "Installing packages...\n"
-  sudo sh -c "apt-get update"
-  sudo sh -c "apt-get install ${PACKAGE_LIST}"
-  # for package in ${PACKAGE_LIST[@]}
-  # do
-  #   sudo sh -c "apt-get install -y ${package}"
-  # done
-}
