@@ -7,11 +7,11 @@ function get_gpg() {
 function add_gpg_keys() {
   printf "Adding gpg keys...\n"
 
-  # Brave
+  # Brave https://brave.com/linux/#linux
   printf "Brave Browser\n"
   sudo sh -c "curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg"
 
-  # VS Code
+  # VS Code https://code.visualstudio.com/docs/setup/linux
   get_gpg 
 
 }
