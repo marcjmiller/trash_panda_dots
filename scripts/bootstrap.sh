@@ -31,6 +31,7 @@ SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # Source all of our helper scripts
 source $SCRIPT_DIR/functions.sh
+source $SCRIPT_DIR/install_packages.sh
 source $SCRIPT_DIR/terminal_setup.sh
 
 function main {
@@ -47,7 +48,7 @@ function main {
 
   # General machine Setup
   setup
-  installPackages
+  install_packages
 
   # Terminal Setup
   # installOhMyZsh
