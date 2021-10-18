@@ -1,0 +1,5 @@
+Ciphers aes128-ctr,aes192-ctr,aes256-ctr
+Protocol 2
+MACs hmac-sha2-256,hmac-sha2-512
+PermitEmptyPasswords no
+PermitUserEnvironment no
