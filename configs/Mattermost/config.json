@@ -19,7 +19,7 @@
     {
       "name": "GBSD",
       "url": "https://chat.gbsd.fences.dso.mil",
-      "order": 4
+      "order": 3
     }
   ],
   "showTrayIcon": true,
