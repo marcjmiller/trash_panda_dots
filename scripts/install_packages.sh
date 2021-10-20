@@ -43,7 +43,7 @@ function install_apt {
 
   for PACKAGE in ${PACKAGE_LIST[@]}
   do
-    PKG_INSTALLED=$(dpkg-query -W -f='${db:Status-Status}' $PACKAGE 2>&1| grep -c "installed"; return 0)
+    PKG_INSTALLED=$(dpkg-query -W -f='${Status}\n' $PACKAGE 2>&1| grep -c "ok installed"; return 0)
     if [ $PKG_INSTALLED -ge 1 ]; then
       printf " -> %s already installed, skipping...\n" "${PACKAGE}"
     else
@@ -71,6 +71,7 @@ function install_apt {
 
       printf " -> Installing debs...\n"
       for DEB in *.deb; do
+        printf "   -> Installing %s deb...\n" "$DEB"
         sudo sh -c "DEBIAN_FRONTEND=noninteractive apt-get install -qq /tmp/debs/${DEB}" < /dev/null > /dev/null
       done
       jobsDone
