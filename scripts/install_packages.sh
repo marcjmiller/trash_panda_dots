@@ -48,11 +48,12 @@ function install_apt {
       printf " -> %s already installed, skipping...\n" "${PACKAGE}"
     else
       printf " -> Installing %s ...\n" "$PACKAGE"
-      sudo sh -c "DEBIAN_FRONTEND=noninteractive apt-get install -qq ${PACKAGE}" > /dev/null
+      sudo sh -c "DEBIAN_FRONTEND=noninteractive apt-get install -qq ${PACKAGE}" < /dev/null > /dev/null
     fi
   done
 
   function install_debs() {
+    newline
     printf "Installing packages from .deb files...\n"
     mkdir -p /tmp/debs
 
