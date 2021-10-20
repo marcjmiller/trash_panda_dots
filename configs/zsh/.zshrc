@@ -40,7 +40,7 @@ plugins=(alias-finder direnv docker docker-compose fzf git gitfast helm httpie k
 # Turn on Alias-finder
 ZSH_ALIAS_FINDER_AUTOMATIC=true
 
-source $ZSH/oh-my-zsh.sh
+source $HOME/.oh-my-zsh/oh-my-zsh.sh
 
 source ~/.zsh_func
 source ~/.zsh_aliases
