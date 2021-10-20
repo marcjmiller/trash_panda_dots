@@ -30,7 +30,7 @@ function main {
       -l | --laptop)
         printf " -> Laptop install: adding tlp to package list\n"
         IS_LAPTOP=1
-        PACKAGE_LIST=( ${PACKAGE_LIST[@]} tlp )
+        PACKAGE_LIST+=( tlp ) # ${PACKAGE_LIST[@]}
       ;;
 
       *)
@@ -38,11 +38,12 @@ function main {
       ;;
     esac
   done
-  printf "Done parsing script args\n"
+  jobsDone
 
   ### General Setup ###
   setup
-  install_packages
+  install_apt
+  install_debs
 
   ### Terminal Setup ###
   # installOhMyZsh

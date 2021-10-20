@@ -1,1 +1,2 @@
-"Brave" "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" "/etc/apt/sources.list.d/brave-browser-release.list"
+Brave,deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main,brave-browser-release.list
+VS Code,deb [signed-by=/usr/share/keyrings/microsoft.gpg arch=amd64] https://packages.microsoft.com/repos/vscode stable main,vscode-release.list

@@ -19,7 +19,7 @@ Install: sh -c "$(curl -fsSL https://raw.githubusercontent.com/marcjmiller/trash
 - kustomize
 - git
 - helm
-- mattermost
+- mattermost-desktop
 - maven
 - neovim (vi/vim alternative)
 - nodejs

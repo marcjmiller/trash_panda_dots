@@ -1,4 +1,5 @@
 apt-transport-https
+apt-utils
 brave-browser
 ca-certificates
 code
@@ -7,13 +8,11 @@ fzf
 git
 gnupg
 kitty
-mattermost-desktop
 maven
 neovim
 nodejs
 npm
 python3
-slack
 software-properties-common
 wget
 zsh

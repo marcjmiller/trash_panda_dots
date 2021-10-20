@@ -8,9 +8,10 @@ function setup() {
 
 checkOs() {
   local VALID_RELEASES=( 20.04 21.04 )
-  DIST=$(lsb_release -is)
-  VERSION=$(lsb_release -rs)
-  CODENAME=$(lsb_release -cs)
+  DIST="$(lsb_release -is)"
+  VERSION="$(lsb_release -rs)"
+  CODENAME="$(lsb_release -cs)"
+  PRETTYNAME="$(lsb_release -ds)"
 
   newline
   printf "Checking OS and version...\n"
@@ -21,11 +22,11 @@ checkOs() {
   fi
 
   if [[ ! " ${VALID_RELEASES[*]} " =~ "$VERSION" ]]; then
-    printf "  Sorry, only Ubuntu %s are supported\n"
+    printf "  Sorry, Ubuntu %s not supported\n" "$VERSION"
     exit 1
   fi
 
-  printf " -> Found %s\n" "$(lsb_release -ds)"
+  printf " -> Found %s\n" "$PRETTYNAME"
 }
 
 function queryBluetooth() {
@@ -44,14 +45,14 @@ function queryBluetooth() {
     newline
     printf " -> Skipping bluetooth headset setup\n"
   fi
+  jobsDone
 }
 
 function getElevatedPermissions() {
   newline
   printf "Requesting elevated permissions to install software...\n"
   sudo -v
-  printf " -> Permissions elevated"
-  newline
+  jobsDone
   while true; do
     sudo -n true;
     sleep 60;
@@ -61,4 +62,16 @@ function getElevatedPermissions() {
 
 function newline() {
   printf "\n"
+}
+
+function jobsDone() {
+  printf " -> Done!\n"
+}
+
+function pushd {
+  command pushd "$@" > /dev/null
+}
+
+function popd {
+  command popd "$@" > /dev/null
 }
