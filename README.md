@@ -7,7 +7,12 @@ The purpose of this repo is to quickly configure a new machine for use by DevSec
 - System must be running Ubuntu 20.04 or 21.04 (or some variant of those releases)
 
 ### Installation
-Install: sh -c "$(curl -fsSL https://raw.githubusercontent.com/marcjmiller/trash_panda_dots/main/scripts/bootstrap.sh)"
+1. Clone the repository  directory
+```git clone https://github.com/marcjmiller/trash_panda_dots```
+2. Change to the directory
+```cd trash_panda_dots```
+3. Run
+```./scripts/bootstrap.sh```
 
 ### What this repo sets up for you
 - appgate sdp
