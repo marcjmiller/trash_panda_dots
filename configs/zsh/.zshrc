@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/mrouija/.oh-my-zsh"
+export ZSH="~/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -37,7 +37,7 @@ HISTSIZE=1000000
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 plugins=(alias-finder direnv docker docker-compose fzf git gitfast helm httpie kubectl sudo z zsh-autosuggestions zsh-completions zsh-syntax-highlighting)
 
-# Turn on Alias-finder 
+# Turn on Alias-finder
 ZSH_ALIAS_FINDER_AUTOMATIC=true
 
 source $ZSH/oh-my-zsh.sh
@@ -58,8 +58,3 @@ command -v flux >/dev/null && . <(flux completion zsh) && compdef _flux flux
 
 # Add go to path
 export PATH=$PATH:/usr/local/go/bin
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/mrouija/.sdkman"
-[[ -s "/home/mrouija/.sdkman/bin/sdkman-init.sh" ]] && source "/home/mrouija/.sdkman/bin/sdkman-init.sh"
-
