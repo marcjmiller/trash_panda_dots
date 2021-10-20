@@ -3,12 +3,13 @@
 # Exit on any non-zero exit codes
 set -e
 
-# Path to the script being executed
+# Paths
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+DOTS_DIR=$HOME/.dotfiles
 
 # Default packages to install
 PACKAGE_LIST=()
-readarray PACKAGE_LIST < $SCRIPT_DIR/packages.txt
+readarray PACKAGE_LIST < $SCRIPT_DIR/apt/packages.txt
 
 # Some starter Boolean vars, 0 = false, 1 = true
 IS_LAPTOP=0   # Whether installing on a laptop or not
@@ -38,24 +39,26 @@ function main {
       ;;
     esac
   done
-  jobsDone
+  job_done
 
   ### General Setup ###
   setup
+  get_repo
   install_apt
   install_debs
 
   ### Terminal Setup ###
-  # installOhMyZsh
-  # clonePlugins
-  # updateZshConfig
+  installOhMyZsh
+  clonePlugins
+  cloneThemes
+  updateZshConfig
 
   ### Link configs ###
 
   ### Script end ###
-  newline
+  new_line
   printf "That's all folks!\n"
-  newline
+  new_line
 }
 
 main ${@}

@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
-APT_SOURCES=$SCRIPT_DIR/apt_sources.txt
+APT_SOURCES=$SCRIPT_DIR/apt/apt_sources.txt
 SOURCES_FOLDER=/etc/apt/sources.list.d
+REPO_URL=https://github.com/marcjmiller/trash_panda_dots.git
 
 function add_gpg_keys() {
-
-  newline
+  new_line
   printf "Adding gpg keys...\n"
-  sudo sh -c "cp -u $SCRIPT_DIR/gpg_keys/* /usr/share/keyrings/"
-  jobsDone
+  sudo sh -c "cp -u $DOTS_DIR/scripts/apt/gpg_keys/* /usr/share/keyrings/"
+  job_done
 }
 
 function add_apt_sources() {
-  newline
+  new_line
   printf "Adding apt sources...\n"
   while IFS=',' read -a SOURCE; do
     APP=${SOURCE[0]}
@@ -25,56 +25,65 @@ function add_apt_sources() {
       printf " -> Adding source for %s...\n" "$APP"
       echo "$SRC" > "$SOURCES_FOLDER/$FILE"
     fi
-  done < $SCRIPT_DIR/apt_sources.txt
-  jobsDone
+  done < $SCRIPT_DIR/apt/apt_sources.txt
+  job_done
 }
 
 function install_apt {
   add_gpg_keys
   add_apt_sources
 
-  newline
+  new_line
   printf "Updating apt...\n"
-  sudo sh -c "DEBIAN_FRONTEND=noninteractive apt-get update -qq"
-  jobsDone
+  apt_update
+  job_done
 
-  newline
+  new_line
   printf "Installing packages with apt...\n"
 
-  for PACKAGE in ${PACKAGE_LIST[@]}
-  do
-    PKG_INSTALLED=$(dpkg-query -W -f='${Status}\n' $PACKAGE 2>&1| grep -c "ok installed"; return 0)
-    if [ $PKG_INSTALLED -ge 1 ]; then
+  for PACKAGE in ${PACKAGE_LIST[@]}; do
+    if [[ $(package_installed "$PACKAGE") -gt 0 ]]; then
       printf " -> %s already installed, skipping...\n" "${PACKAGE}"
     else
       printf " -> Installing %s ...\n" "$PACKAGE"
-      sudo sh -c "DEBIAN_FRONTEND=noninteractive apt-get install -qq ${PACKAGE}" < /dev/null > /dev/null
+      install_package "${PACKAGE}" < /dev/null > /dev/null
     fi
   done
 
   function install_debs() {
-    newline
+    new_line
     printf "Installing packages from .deb files...\n"
-    mkdir -p /tmp/debs
+    mkdir -p $DOTS_DIR/apt/debs
 
-    pushd /tmp/debs
+    pushd $DOTS_DIR/apt/debs
       printf " -> Grabbing files...\n"
       while read -a DEB; do
         APP=${DEB[0]}
-        URL=${DEB[1]}
+        CMD=${DEB[1]}
+        URL=${DEB[2]}
 
-        printf "   -> Downloading %s deb...\n" "$APP"
-        curl -fSsLlO "${URL}"
-      done < $SCRIPT_DIR/debs.txt
-      jobsDone
-      newline
+        if [ $(command_exists "$CMD") ]; then
+          printf "   -> %s already installed, skipping...\n" "$APP"
+        else
+          printf "   -> Downloading %s deb...\n" "$APP"
+          curl -fSsLlO "${URL}"
+        fi
+      done < $SCRIPT_DIR/apt/debs.txt
 
-      printf " -> Installing debs...\n"
-      for DEB in *.deb; do
-        printf "   -> Installing %s deb...\n" "$DEB"
-        sudo sh -c "DEBIAN_FRONTEND=noninteractive apt-get install -qq /tmp/debs/${DEB}" < /dev/null > /dev/null
-      done
-      jobsDone
+      job_done
+      new_line
+
+      if [ -f "$DOTS_DIR/debs/$DEB" ]; then
+        printf " -> Installing debs...\n"
+        for DEB in *.deb; do
+          printf "   -> Installing %s deb...\n" "$DEB"
+          install_package "$DOTS_DIR/tmp/debs/$DEB"
+        done
+        sudo sh -c "rm -rf /tmp/debs"
+        job_done
+      else
+        printf " -> No debs found to install...\n"
+      fi
     popd
   }
 }
