@@ -11,7 +11,7 @@ function installOhMyZsh() {
     printf " -> Found Oh My Zsh, skipping...\n"
   else
     printf " -> Oh My Zsh not found, installing...\n"
-    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh) -s -batch" ""
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
   fi
   job_done
 }
