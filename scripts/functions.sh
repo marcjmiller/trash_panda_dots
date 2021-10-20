@@ -97,7 +97,7 @@ function command_exists() {
 }
 
 function install_package() {
-  sudo sh -c "DEBIAN_FRONTEND=noninteractive apt-get install -qq ${1}" < /dev/null > /dev/null
+  sudo sh -c "DEBIAN_FRONTEND=noninteractive apt-get -qq install ${1}" < /dev/null > /dev/null
 }
 
 function apt_update() {
