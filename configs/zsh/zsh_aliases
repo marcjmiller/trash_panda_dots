@@ -1,0 +1,29 @@
+# use NeoVim instead of vi/vim
+alias vi="nvim"
+alias vim="nvim"
+
+# alias ssh for kitty
+alias ssh="kitty +kitten ssh"
+
+# ZSH Config aliases
+alias zcfg="vi ~/.zshrc"
+alias zfun="vi ~/.zsh_func"
+alias zali="vi ~/.zsh_aliases"
+alias zexp="vi ~/.zsh_exports"
+alias omz="vi ~/.oh-my-zsh"
+alias reload="source ~/.zshrc"
+
+# Apt-get aliases
+alias agu="sudo apt-get update && apt list --upgradable"
+alias agi="sudo apt-get install -y"
+alias agd="sudo apt-get dist-upgrade"
+alias ags="sudo apt search"
+alias afs="sudo apt-file search"
+alias alu="apt list --upgradable"
+alias cleanup="sudo apt-get autoremove && sudo apt-get autoclean"
+
+# FD (a faster find alternative)
+alias fd=fdfind
+
+# Screenshot area select
+alias sshot="maim -s | xclip -selection clipboard -t image/png"
