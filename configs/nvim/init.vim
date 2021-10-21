@@ -11,6 +11,9 @@ set shiftwidth=2
 " show relative line numbers
 set relativenumber
 
+" also show the current line number
+set number
+
 " use auto-indent
 set autoindent
 

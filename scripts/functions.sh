@@ -13,7 +13,6 @@ check_os() {
   CODENAME="$(lsb_release -cs)"
   PRETTYNAME="$(lsb_release -ds)"
 
-  new_line
   printf "Checking OS and version...\n"
 
   if [[ ! "Ubuntu" =~ "$DIST" ]]; then
@@ -26,14 +25,13 @@ check_os() {
     exit 1
   fi
 
-  printf " -> Found %s\n" "$PRETTYNAME"
+  printf " -> Found %s\n\n" "$PRETTYNAME"
 }
 
 function get_repo() {
-  new_line
   printf "Checking for git...\n"
   if [  $(package_installed git) -gt 0 ]; then
-    printf " -> Found git!"
+    printf " -> Found git!\n"
   else
     printf " -> Git not found, installing git...\n"
     apt_update
@@ -41,12 +39,10 @@ function get_repo() {
   fi
   job_done
 
-  new_line
   printf "Checking for dotfiles repository...\n"
   if [ -d "${DOTS_DIR}" ]; then
     printf " -> Dotfiles repository found skipping clone\n"
-    new_line
-    printf "Execute git pull? [y/N]\n"
+    printf " -> Execute git pull? [y/N]\n"
     old_stty_cfg=$(stty -g)
     stty raw -echo ; GIT_PULL=$(head -c 1) ; stty $old_stty_cfg # Careful playing with stty
     if printf "$GIT_PULL" | grep -iq "^y" ;then
@@ -62,7 +58,6 @@ function get_repo() {
 }
 
 function query_bluetooth() {
-  new_line
   printf "Will you be using a Bluetooth headset? [y/N]"
   old_stty_cfg=$(stty -g)
   stty raw -echo ; USE_BLUETOOTH=$(head -c 1) ; stty $old_stty_cfg # Careful playing with stty
@@ -73,6 +68,7 @@ function query_bluetooth() {
     new_line
     printf " -> Adding pipewire and dependencies to package list\n"
     PACKAGE_LIST=( ${PACKAGE_LIST[@]} pipewire gstreamer1.0-pipewire libspa-0.2-{bluetooth,jack} pipewire-audio-client-libraries )
+    USE_BLUETOOTH=1
   else
     new_line
     printf " -> Skipping bluetooth headset setup\n"
@@ -81,8 +77,8 @@ function query_bluetooth() {
 }
 
 function get_elevated_permissions() {
-  new_line
-  printf "Requesting elevated permissions to install software...\n"
+  printf "Script requires elevated permissions to install software...\n"
+  printf " -> Requesting sudo to install software...\n"
   sudo -v
   job_done
   while true; do
@@ -101,7 +97,10 @@ function install_package() {
 }
 
 function apt_update() {
+  printf "Updating apt...\n"
+  printf " -> Updating repositories...\n"
   sudo sh -c "DEBIAN_FRONTEND=noninteractive apt-get -qq update"
+  job_done
 }
 
 function package_installed() {
@@ -114,7 +113,7 @@ function new_line() {
 }
 
 function job_done() {
-  printf " -> Done!\n"
+  printf "Done!\n\n"
 }
 
 function pushd {

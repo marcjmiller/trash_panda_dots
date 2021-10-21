@@ -18,6 +18,7 @@ IS_LAPTOP=0   # Whether installing on a laptop or not
 source $SCRIPT_DIR/functions.sh
 source $SCRIPT_DIR/install_packages.sh
 source $SCRIPT_DIR/terminal_setup.sh
+source $SCRIPT_DIR/configure_apps.sh
 
 function main {
   printf "Parsing script args...\n"
@@ -30,7 +31,7 @@ function main {
 
       -l | --laptop)
         printf " -> Laptop install: adding tlp to package list\n"
-        IS_LAPTOP=1
+        IS_LAPTOP=1 IS_LAPTOP=1
         PACKAGE_LIST+=( tlp ) # ${PACKAGE_LIST[@]}
       ;;
 
