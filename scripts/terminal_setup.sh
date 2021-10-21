@@ -55,12 +55,11 @@ function updateZshConfig() {
 
   printf "Copying Trash Panda zsh configs...\n"
   for FILE in ${DOTS_DIR}/configs/zsh/*; do
-    if [ -f ${FILE} ]; then
-      echo $FILE
-    #   printf " -> Found $FILE, skipping...\n"
-    # else
-    #   printf " -> Copying %s...\n"
-    #   cp "$DOTS_DIR/configs/zsh/$FILE" "$HOME/$FILE"
+    if [ -f ${HOME}/.$(basename ${FILE}) ]; then
+      printf " -> Found .$(basename ${FILE}), skipping...\n"
+    else
+      printf " -> Copying %s...\n" $(basename ${FILE})
+      cp "$FILE" "$HOME/.$(basename ${FILE})"
     fi
   done
   job_done
