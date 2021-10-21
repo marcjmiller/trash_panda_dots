@@ -54,7 +54,7 @@ function updateZshConfig() {
   fi
 
   printf "Copying Trash Panda zsh configs...\n"
-  for FILE in `ls ${DOTS_DIR}/configs/zsh/.*`; do
+  for FILE in ${DOTS_DIR}/*`; do
     if [ -f ${FILE} ]; then
       echo $FILE
     #   printf " -> Found $FILE, skipping...\n"
