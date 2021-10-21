@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Path to your oh-my-zsh installation.
-export ZSH="~/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 ZSH_THEME="powerlevel10k/powerlevel10k"
@@ -40,21 +40,21 @@ plugins=(alias-finder direnv docker docker-compose fzf git gitfast helm httpie k
 # Turn on Alias-finder
 ZSH_ALIAS_FINDER_AUTOMATIC=true
 
-source $HOME/.oh-my-zsh/oh-my-zsh.sh
+source $ZSH/oh-my-zsh.sh
 
-source ~/.zsh_func
-source ~/.zsh_aliases
-source ~/.zsh_exports
+source $HOME/.zsh_func
+source $HOME/.zsh_aliases
+source $HOME/.zsh_exports
 
 # User configuration
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# To customize prompt, run `p10k configure` or edit $HOME/.p10k.zsh.
+[[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
 
 # Completions
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/bin/terraform terraform
-command -v flux >/dev/null && . <(flux completion zsh) && compdef _flux flux
+# complete -o nospace -C /usr/bin/terraform terraform
+# command -v flux >/dev/null && . <(flux completion zsh) && compdef _flux flux
 
 # Add go to path
-export PATH=$PATH:/usr/local/go/bin
+# export PATH=$PATH:/usr/local/go/bin
