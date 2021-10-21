@@ -36,10 +36,10 @@ function clonePlugins() {
 function cloneThemes() {
   new_line
   printf "Checking for zsh themes...\n"
-  while IFS= read -a THEME; do
+  while IFS=',' read -a THEME; do
     THEME_NAME=${THEME[0]}
     THEME_URL=${THEME[1]}
-
+    
     if [ -d "${ZSH_THEMES_DIR}/${THEME_NAME}" ]; then
       printf " -> Found %s, skipping...\n" "${THEME_NAME}"
     else
