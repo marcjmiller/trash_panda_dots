@@ -23,7 +23,7 @@ function add_apt_sources() {
       printf " -> Found %s, skipping...\n" "$FILE"
     else
       printf " -> Adding source for %s...\n" "$APP"
-      echo "$SRC" > "$SOURCES_FOLDER/$FILE"
+      echo "$SRC" | sudo tee "$SOURCES_FOLDER/$FILE"
     fi
   done < $SCRIPT_DIR/apt/apt_sources.txt
   job_done
@@ -46,7 +46,7 @@ function install_apt {
       printf " -> %s already installed, skipping...\n" "${PACKAGE}"
     else
       printf " -> Installing %s ...\n" "$PACKAGE"
-      install_package "${PACKAGE}" < /dev/null > /dev/null
+      install_package "${PACKAGE}"
     fi
   done
 
