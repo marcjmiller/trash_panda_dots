@@ -69,7 +69,7 @@ function download_debs() {
   printf " -> Grabbing files...\n"
   mkdir -p $DOTS_DIR/apt/debs
   pushd $DOTS_DIR/apt/debs
-    while read -a DEB; do
+    while IFS=',' read -a DEB; do
       APP=${DEB[0]}
       CMD=${DEB[1]}
       URL=${DEB[2]}

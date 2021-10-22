@@ -57,7 +57,7 @@ function configure_docker() {
 
 function configure_preferred_apps() {
   printf "Setting app defaults...\n"
-  printf " - > kitty\n"
+  printf " -> kitty\n"
   sudo update-alternatives --set x-terminal-emulator $(which kitty)
   job_done
 }
