@@ -24,7 +24,7 @@ function add_apt_sources() {
     fi
   done < $SCRIPT_DIR/apt/apt_sources.txt
 
-  sudo sh -c "sed -i 's/LSB_RELEASE_CS/${CODENAME}/g'" "/etc/apt/sources.list.d/docker.list"
+  sudo sh -c "sed -i 's/LSB_RELEASE_CS/${CODENAME}/g' /etc/apt/sources.list.d/docker.list"
   job_done
 }
 
