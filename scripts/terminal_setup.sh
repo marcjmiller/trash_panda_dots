@@ -10,6 +10,11 @@ function installOhMyZsh() {
   else
     printf " -> Oh My Zsh not found, installing...\n"
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    if [ -f "$HOME/.zshrc" ]; then
+      printf "Clearing stock oh-my-zsh config files...\n"
+      mv $HOME/.zshrc $HOME/.zshrc.stock
+      job_done
+    fi
   fi
   job_done
 }
@@ -47,12 +52,6 @@ function cloneThemes() {
 }
 
 function updateZshConfig() {
-  if [ -f "$HOME/.zshrc" ]; then
-    printf "Clearing stock oh-my-zsh config files...\n"
-    mv $HOME/.zshrc $HOME/.zshrc.stock
-    job_done
-  fi
-
   printf "Copying Trash Panda zsh configs...\n"
   for FILE in ${DOTS_DIR}/configs/zsh/*; do
     if [ -f ${HOME}/.$(basename ${FILE}) ]; then
@@ -66,6 +65,7 @@ function updateZshConfig() {
 
   printf "Updating shell...\n"
   sudo sh -c "chsh -s $(which zsh) $(whoami)"
+
   printf " -> You will see the changes when you open a new terminal\n"
   job_done
 }

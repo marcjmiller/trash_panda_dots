@@ -89,7 +89,7 @@ function get_elevated_permissions() {
 }
 
 function command_exists() {
-  command -v "$@" >/dev/null 2>&1 | wc -l
+  command -v "$@" | wc -l
 }
 
 function install_package() {
@@ -97,8 +97,7 @@ function install_package() {
 }
 
 function apt_update() {
-  printf "Updating apt...\n"
-  printf " -> Updating repositories...\n"
+  printf " -> Updating apt repositories...\n"
   sudo sh -c "DEBIAN_FRONTEND=noninteractive apt-get -qq update"
   job_done
 }

@@ -20,6 +20,7 @@ IS_LAPTOP=0   # Whether installing on a laptop or not
 # Source all of our helper scripts
 source $SCRIPT_DIR/functions.sh
 source $SCRIPT_DIR/install_packages.sh
+source $SCRIPT_DIR/install_tools.sh
 source $SCRIPT_DIR/terminal_setup.sh
 source $SCRIPT_DIR/configure_apps.sh
 
@@ -50,6 +51,7 @@ function main {
   get_repo
   install_apt
   install_debs
+  install_tools
 
   ### Terminal Setup ###
   installOhMyZsh

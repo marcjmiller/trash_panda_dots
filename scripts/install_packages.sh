@@ -19,10 +19,12 @@ function add_apt_sources() {
     if [ -f "$SOURCES_FOLDER/$FILE" ]; then
       printf " -> Found %s, skipping...\n" "$FILE"
     else
-      printf " -> Adding source for %s...\n" "$APP"
+      printf " -> Adding source for %s in %s...\n" "$APP" "$SOURCES_FOLDER/$FILE"
       echo "$SRC" | sudo tee "$SOURCES_FOLDER/$FILE"
     fi
   done < $SCRIPT_DIR/apt/apt_sources.txt
+
+  sudo sh -c "sed -i 's/LSB_RELEASE_CS/${CODENAME}/g'" "/etc/apt/sources.list.d/docker.list"
   job_done
 }
 
