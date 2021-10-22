@@ -21,7 +21,9 @@ function install_docker_compose() {
 function install_helm() {
   if [ $(command_exists helm) -eq 0 ]; then
     printf " -> Installing helm...\n"
+    export DESIRED_VERSION=v3.7.1
     curl "https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3" | bash
+    unset DESIRED_VERSION
   else
     printf " -> Found helm, skipping...\n"
   fi
