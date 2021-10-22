@@ -48,7 +48,7 @@ function install_debs() {
   printf "Installing packages from .deb files...\n"
   download_debs
 
-  printf " -> Installing debs...\n"
+  printf "Installing debs...\n"
   for DEB in *.deb; do
     if [ -f "$DOTS_DIR/debs/$DEB" ]; then
       if [ $(package_installed "$PACKAGE") -eq 0 ]; then

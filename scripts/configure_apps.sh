@@ -1,10 +1,13 @@
 
 function config_apps() {
   printf "Configuring apps...\n"
-  for APP in ${DOTS_DIR}/configs/*;do
-    APP_NAME=$(basename $APP)
+  while IFS=',' read -a $APP; do
+    APP_NAME=${APP[0]}
+    APP_CFG_PATH=${APP[1]}
+
     if [ "${APP_NAME}" != "zsh" ]; then
-      printf " -> %s\n" "$APP_NAME"
+      printf " -> %s cfg: %s\n" "${APP_NAME}" "${APP_CFG_PATH}"
     fi
-  done
+  done < ${DOTS_DIR}/configs/locations.txt
+  job_done
 }
