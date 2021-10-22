@@ -21,7 +21,8 @@ function install_docker_compose() {
 function install_helm() {
   if [ $(command_exists helm) -eq 0 ]; then
     printf " -> Installing helm...\n"
-    curl -s "https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3" | bash
+    curl -fsSL -o ./get_helm.sh "https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3"
+    sh ./get_helm.sh
   else
     printf " -> Found helm, skipping...\n"
   fi
@@ -38,7 +39,7 @@ function install_k3d() {
 
 function install_kind() {
   if [ $(command_exists kind) -eq 0 ]; then
-    printf " -> Installing kind...%s\n" "command_exists kind"
+    printf " -> Installing kind...\n"
     pushd /tmp
       curl -sLo ./kind "https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64"
       sudo sh -c "chmod +x /tmp/kind"
