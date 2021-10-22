@@ -2,7 +2,7 @@
 function config_apps() {
   printf "Configuring apps...\n"
   copy_configs
-  configure_appgate
+  # configure_appgate # TODO: troubleshoot appgate config, it doesn't work, the window hangs.
   configure_docker
   configure_preferred_apps
 }
