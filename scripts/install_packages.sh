@@ -54,8 +54,8 @@ function install_debs() {
   printf "Installing debs...\n"
   for DEB in `ls $HOME/.dotfiles/apt/debs/*.deb`; do
     if [ -f "$DEB" ]; then
-      printf "   -> Installing %s deb...\n" "$DEB"
-      sudo sh -c "apt-get -qq install $DEB"
+      printf "   -> Installing %s...\n" "$(basename $DEB)"
+      sudo sh -c "DEBIAN_FRONTEND=noninteractive apt-get -qq install $DEB" 
     else
       printf " -> No debs found to install...\n"
     fi
