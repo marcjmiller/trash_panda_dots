@@ -24,6 +24,7 @@ function add_apt_sources() {
     fi
   done < $SCRIPT_DIR/apt/apt_sources.txt
 
+  printf " -> Fixing docker.list for %s...\n" "$CODENAME"
   sudo sh -c "sed -i 's/LSB_RELEASE_CS/${CODENAME}/g' /etc/apt/sources.list.d/docker.list"
   job_done
 }
@@ -51,13 +52,11 @@ function install_debs() {
   download_debs
 
   printf "Installing debs...\n"
-  for DEB in `ls $DOTS_DIR/apt/debs*.deb`; do
-    printf " -> %s"
+  for DEB in `ls $HOME/.dotfiles/apt/debs/*.deb`; do
+    printf " -> %s" "$DEB"
     if [ -f "$DEB" ]; then
-      if [ $(package_installed "$PACKAGE") -eq 0 ]; then
-        printf "   -> Installing %s deb...\n" "$DEB"
-        install_package "$DOTS_DIR/apt/debs/$DEB"
-      fi
+      printf "   -> Installing %s deb...\n" "$DEB"
+      install_package "$DOTS_DIR/apt/debs/$DEB"
     else
       printf " -> No debs found to install...\n"
     fi
