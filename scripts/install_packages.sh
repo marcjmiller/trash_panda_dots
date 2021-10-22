@@ -51,8 +51,9 @@ function install_debs() {
   download_debs
 
   printf "Installing debs...\n"
-  for DEB in *.deb; do
-    if [ -f "$DOTS_DIR/debs/$DEB" ]; then
+  for DEB in $DOTS_DIR/apt/debs/*.deb; do
+    printf " -> %s"
+    if [ -f "$DEB" ]; then
       if [ $(package_installed "$PACKAGE") -eq 0 ]; then
         printf "   -> Installing %s deb...\n" "$DEB"
         install_package "$DOTS_DIR/tmp/debs/$DEB"

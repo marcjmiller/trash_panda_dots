@@ -19,6 +19,7 @@ function copy_configs() {
           case $APP_NAME in
             "docker" | "sshd")
               APP_CFG_PATH=/etc/${APP_NAME}/${CFG_FILENAME}
+              sudo sh -c "mkdir -p /etc/${APP_NAME}"
             ;;
 
             "git")
@@ -46,6 +47,7 @@ function copy_configs() {
 }
 
 function configure_appgate() {
+  printf " -> appgate"
   appgate --url appgate://cnap-connect.code.cdl.af.mil/eyJwcm9maWxlTmFtZSI6IlBsYXRmb3JtMSAtIFNTTyIsInNwYSI6eyJtb2RlIjoiVENQIiwibmFtZSI6IlBsYXRmb3JtMS1TU08iLCJrZXkiOiJkNjJhMjQ3ODc0ZGIxY2IxOGZmYjFiNWI4OWQzZTM0ZTZkY2NjMzliOGY1MTI0NDBmN2Q2ZTFmYzlkNGMwMDM2In0sImNhRmluZ2VycHJpbnQiOiJkMzc5NmI4OTczNTU5N2E2OWNlNzVlMjQ0NjAzZmU3OGRlZDU0ZTZlYmJkYTQ1ZWM4NDE2OGRiNWUyNjBjN2FhIiwiaWRlbnRpdHlQcm92aWRlck5hbWUiOiJTU08gLSBQbGF0Zm9ybSAxIn0= --novalidate
 }
 
