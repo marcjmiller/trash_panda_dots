@@ -21,8 +21,7 @@ function install_docker_compose() {
 function install_helm() {
   if [ $(command_exists helm) -eq 0 ]; then
     printf " -> Installing helm...\n"
-    curl -fsSL -o ./get_helm.sh "https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3"
-    sh ./get_helm.sh
+    curl "https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3" | bash
   else
     printf " -> Found helm, skipping...\n"
   fi
