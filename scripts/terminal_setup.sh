@@ -58,7 +58,7 @@ function updateZshConfig() {
     if [ -f ${HOME}/.$(basename ${FILE}) ]; then
       printf " -> Found .$(basename ${FILE}), skipping...\n"
     else
-      printf " -> Copying %s...\n" $(basename ${FILE})
+      printf " -> Copying .%s...\n" $(basename ${FILE})
       cp "$FILE" "$HOME/.$(basename ${FILE})"
     fi
   done

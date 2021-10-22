@@ -2,7 +2,6 @@
 
 APT_SOURCES=$SCRIPT_DIR/apt/apt_sources.txt
 SOURCES_FOLDER=/etc/apt/sources.list.d
-REPO_URL=https://github.com/marcjmiller/trash_panda_dots.git
 
 function add_gpg_keys() {
   printf "Adding gpg keys...\n"

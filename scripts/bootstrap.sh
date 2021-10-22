@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
 # Exit on any non-zero exit codes
-set -e
+# set -e
+
+# URL for getting  the dotfiles
+REPO_URL=https://github.com/marcjmiller/trash_panda_dots.git
 
 # Paths
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
@@ -55,6 +58,7 @@ function main {
   updateZshConfig
 
   ### Link configs ###
+  config_apps
 
   ### Script end ###
   new_line
