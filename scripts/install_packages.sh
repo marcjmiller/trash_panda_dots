@@ -51,12 +51,12 @@ function install_debs() {
   download_debs
 
   printf "Installing debs...\n"
-  for DEB in $DOTS_DIR/apt/debs/*.deb; do
+  for DEB in *.deb; do
     printf " -> %s"
     if [ -f "$DEB" ]; then
       if [ $(package_installed "$PACKAGE") -eq 0 ]; then
         printf "   -> Installing %s deb...\n" "$DEB"
-        install_package "$DOTS_DIR/tmp/debs/$DEB"
+        install_package "$DOTS_DIR/apt/debs/$DEB"
       fi
     else
       printf " -> No debs found to install...\n"
@@ -78,7 +78,7 @@ function download_debs() {
       if [ $(command_exists "$CMD") -gt 0 ]; then
         printf "   -> %s already installed, skipping...\n" "$APP"
       else
-        printf "   -> Downloading %s deb...\n" "$APP"
+        printf "   -> Downloading %s...\n" "$APP"
         curl -fSsLlO "${URL}"
       fi
     done < $SCRIPT_DIR/apt/debs.txt

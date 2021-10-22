@@ -24,7 +24,7 @@ function copy_configs() {
 
             "git")
               APP_CFG_PATH=$HOME
-              CFG_FILENAME='.'+${CFG_FILENAME}
+              CFG_FILENAME='.'${CFG_FILENAME}
             ;;
 
             *)
