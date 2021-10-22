@@ -36,7 +36,7 @@ function install_apt {
   printf "Installing packages with apt...\n"
 
   for PACKAGE in ${PACKAGE_LIST[@]}; do
-    if [[ $(package_installed "$PACKAGE") -gt 0 ]]; then
+    if [[ $(package_installed ${PACKAGE}) -gt 0 ]]; then
       printf " -> %s already installed, skipping...\n" "${PACKAGE}"
     else
       printf " -> Installing %s ...\n" "$PACKAGE"
@@ -74,7 +74,7 @@ function download_debs() {
       CMD=${DEB[1]}
       URL=${DEB[2]}
 
-      if [ $(command_exists "$CMD") ]; then
+      if [ $(command_exists "$CMD") -gt 0 ]; then
         printf "   -> %s already installed, skipping...\n" "$APP"
       else
         printf "   -> Downloading %s deb...\n" "$APP"
