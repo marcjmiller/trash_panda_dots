@@ -1,6 +1,0 @@
-docker,/etc/docker/
-git,$HOME
-kitty,$HOME/.config/kitty
-mattermost,$HOME/.config/mattermost
-nvim,$HOME/.config/nvim
-sshd,/etc/sshd/
