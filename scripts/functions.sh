@@ -103,7 +103,7 @@ function apt_update() {
 }
 
 function package_installed() {
-  dpkg-query -W -f='${Status}\n' $@ 2>&1| grep -c "ok installeapplyd"
+  dpkg-query -W -f='${Status}\n' $@ 2>&1| grep -c "ok installed"
   return 0
 }
 
