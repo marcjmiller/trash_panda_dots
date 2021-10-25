@@ -39,6 +39,11 @@ function main {
         PACKAGE_LIST+=( tlp ) # ${PACKAGE_LIST[@]}
       ;;
 
+      -s | --skip-apt)
+        printf " -> Skipping apt functions\n"
+        SKIP_APT=1
+      ;;
+
       *)
         continue
       ;;

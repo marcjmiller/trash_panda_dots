@@ -2,7 +2,7 @@
 function config_apps() {
   printf "Configuring apps...\n"
   copy_configs
-  # configure_appgate # TODO: troubleshoot appgate config, it doesn't work, the window hangs.
+  # configure_appgate # TODO: troubleshoot appgate config, it doesn't work under docker, the window hangs. VM maybe?
   configure_docker
   configure_preferred_apps
 }
@@ -23,8 +23,7 @@ function copy_configs() {
             ;;
 
             "git")
-              APP_CFG_PATH=$HOME
-              CFG_FILENAME='.'${CFG_FILENAME}
+              APP_CFG_PATH=$HOME/.$CFG_FILENAME
             ;;
 
             *)
@@ -33,13 +32,19 @@ function copy_configs() {
           esac
 
           if [ ! -f $APP_CFG_PATH ]; then
-            printf "   -> Copying %s to %s\n" "${CFG_FILENAME}" "${APP_CFG_PATH}"
+            printf "   -> Copying %s to %s\n" "${CFG_FILENAME}" "$(dirname ${APP_CFG_PATH})/.$"
           else
             printf "   -> Found %s (%s), moving to %s...\n" "${CFG_FILENAME}" "${APP_CFG_PATH}" "${CFG_FILENAME}.old"
             mv ${APP_CFG_PATH} ${APP_CFG_PATH}.old
           fi
           mkdir -p $(dirname ${APP_CFG_PATH})
           cp ${CFG} ${APP_CFG_PATH}
+          if [ "$(basename $APP_CFG_PATH)" == ".gitconfig" ]; then
+            read -p "Enter email for gitlab?  " USER_EMAIL
+            sed -i "s/EMAIL_CHANGEME/${USER_EMAIL}/g" ${APP_CFG_PATH}
+            read -p "Enter plaintext name for gitlab?  " USER_NAME
+            sed -i "s/NAME_CHANGEME/${USER_NAME}/g" ${APP_CFG_PATH}
+          fi
         fi
       done
     fi

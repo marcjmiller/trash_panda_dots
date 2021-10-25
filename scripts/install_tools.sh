@@ -33,6 +33,9 @@ function install_k3d() {
   if [ $(command_exists k3d) -eq 0 ]; then
     printf " -> Installing k3d...\n"
     curl -s "https://raw.githubusercontent.com/rancher/k3d/main/install.sh" | bash
+
+    printf " -> Adding k3d completions to your shell...\n"
+    k3d completion zsh > $HOME/.oh-my-zsh/custom/plugins/zsh-completions/src/_k3d
   else
     printf " -> Found k3d, skipping...\n"
   fi
@@ -46,6 +49,8 @@ function install_kind() {
       sudo sh -c "chmod +x /tmp/kind"
       sudo sh -c "mv /tmp/kind /usr/local/bin/"
     popd
+    printf " -> Adding kind completions to your shell...\n"
+    kind completion zsh > $HOME/.oh-my-zsh/custom/plugins/zsh-completions/src/_kind
   else
     printf " -> Found kind, skipping...\n"
   fi
@@ -60,6 +65,8 @@ function install_kustomize() {
       sudo sh -c "mv /tmp/kustomize /usr/local/bin/"
     fi
     popd
+    printf " -> Adding kustomize completions to your shell...\n"
+    kustomize completion zsh > $HOME/.oh-my-zsh/custom/plugins/zsh-completions/src/_kustomize
   else
     printf " -> Found kustomize, skipping...\n"
   fi
