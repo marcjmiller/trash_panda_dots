@@ -9,6 +9,7 @@ docker-ce
 docker-ce-cli
 fzf
 gnupg
+jq
 kitty
 kubectl
 maven
@@ -16,6 +17,8 @@ neovim
 nodejs
 npm
 python3
+rofi
 software-properties-common
+unzip
 wget
 zsh
