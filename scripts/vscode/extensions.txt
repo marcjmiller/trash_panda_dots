@@ -1,0 +1,13 @@
+alefragnani.project-manager
+dbaeumer.vscode-eslint
+dsznajder.es7-react-js-snippets
+eamodio.gitlens
+esbenp.prettier-vscode
+golang.go
+ms-python.python
+ms-python.vscode-pylance
+ms-vscode-remote.remote-containers
+ms-vsliveshare.vsliveshare-pack
+redhat.vscode-yaml
+streetsidesoftware.code-spell-checker
+TabNine.tabnine-vscode
