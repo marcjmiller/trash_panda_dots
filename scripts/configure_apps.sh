@@ -8,7 +8,7 @@ function config_apps() {
 
 function configure_applications() {
   printf "Configuring apps... \n"
-  # configure_appgate # TODO: troubleshoot appgate config, it doesn't work under docker, the window hangs. VM maybe?
+  configure_appgate # TODO: troubleshoot appgate config, it doesn't work under docker, the window hangs. VM maybe?
   configure_docker
   configure_neovim
   configure_vscode

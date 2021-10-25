@@ -5,6 +5,8 @@
 [user]
 	email = EMAIL_CHANGEME
 	name = NAME_CHANGEME
+[pull]
+  rebase = false
 [init]
 	defaultBranch = main
 [core]
