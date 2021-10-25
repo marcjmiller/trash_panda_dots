@@ -6,6 +6,10 @@
 # URL for getting  the dotfiles
 REPO_URL=https://github.com/marcjmiller/trash_panda_dots.git
 
+# Git user info (optional)
+GIT_EMAIL=${GIT_EMAIL:-CHANGEME_EMAIL}
+GIT_USERNAME=${GIT_USERNAME:-CHANGEME_USERNAME}
+
 # Paths
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 DOTS_DIR=$HOME/.dotfiles
