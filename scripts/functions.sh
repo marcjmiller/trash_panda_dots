@@ -58,22 +58,24 @@ function get_repo() {
 }
 
 function query_bluetooth() {
-  printf "Will you be using a Bluetooth headset? [y/N]"
-  old_stty_cfg=$(stty -g)
-  stty raw -echo ; USE_BLUETOOTH=$(head -c 1) ; stty $old_stty_cfg # Careful playing with stty
-  if printf "$USE_BLUETOOTH" | grep -iq "^y" ;then
-    new_line
-    printf " -> Adding pipewire-debian upstream ppa \n"
-    sudo sh -c "add-apt-repository -y ppa:pipewire-debian/pipewire-upstream" > /dev/null
-    new_line
-    printf " -> Adding pipewire and dependencies to package list \n"
-    PACKAGE_LIST=( ${PACKAGE_LIST[@]} pipewire gstreamer1.0-pipewire libspa-0.2-{bluetooth,jack} pipewire-audio-client-libraries )
-    USE_BLUETOOTH=1
-  else
-    new_line
-    printf " -> Skipping bluetooth headset setup  \n"
+  if [ -z ${USE_BLUETOOTH+x} ]; then
+    printf "Will you be using a Bluetooth headset? [y/N]"
+    old_stty_cfg=$(stty -g)
+    stty raw -echo ; USE_BLUETOOTH=$(head -c 1) ; stty $old_stty_cfg # Careful playing with stty
+    if printf "$USE_BLUETOOTH" | grep -iq "^y" ;then
+      new_line
+      printf " -> Adding pipewire-debian upstream ppa \n"
+      sudo sh -c "add-apt-repository -y ppa:pipewire-debian/pipewire-upstream" > /dev/null
+      new_line
+      printf " -> Adding pipewire and dependencies to package list \n"
+      PACKAGE_LIST=( ${PACKAGE_LIST[@]} pipewire gstreamer1.0-pipewire libspa-0.2-{bluetooth,jack} pipewire-audio-client-libraries )
+      USE_BLUETOOTH=1
+    else
+      new_line
+      printf " -> Skipping bluetooth headset setup  \n"
+    fi
+    job_done
   fi
-  job_done
 }
 
 function get_elevated_permissions() {

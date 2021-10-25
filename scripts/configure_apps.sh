@@ -60,9 +60,11 @@ function copy_configs() {
             if [ "$GIT_EMAIL" = CHANGEME_EMAIL ]; then
               read -p "     -> Enter email for gitlab?  " GIT_EMAIL
             fi
+
             if [ "$GIT_USERNAME" = CHANGEME_USERNAME ]; then
               read -p "     -> Enter plaintext name for gitlab?  " GIT_USERNAME
             fi
+
             sed -i "s/EMAIL_CHANGEME/${GIT_EMAIL}/g" ${APP_CFG_PATH}
             sed -i "s/NAME_CHANGEME/${GIT_USERNAME}/g" ${APP_CFG_PATH}
           fi
@@ -82,6 +84,7 @@ function configure_appgate() {
 function configure_neovim() {
   new_line
   printf " -> neovim \n"
+  printf "   -> Adding vim-plug... \n"
   sh -c 'curl -fsLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 }
 
@@ -122,6 +125,7 @@ function configure_keyboard() {
       ;;
       esac
   done
+  job_done
 
   configure_keyboard_shortcuts
 }

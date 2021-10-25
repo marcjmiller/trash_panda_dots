@@ -39,8 +39,15 @@ function main {
 
       -l | --laptop)
         printf " -> Laptop install: adding tlp to package list \n"
-        IS_LAPTOP=1 IS_LAPTOP=1
+        IS_LAPTOP=1
         PACKAGE_LIST+=( tlp )
+      ;;
+
+      -b | --bluetooth)
+        printf " -> Setting up pipewire for Bluetooth \n"
+        USE_BLUETOOTH=1
+        PACKAGE_LIST+=( pipewire gstreamer1.0-pipewire libspa-0.2-{bluetooth,jack} pipewire-audio-client-libraries )
+
       ;;
 
       -s | --skip-apt)

@@ -72,7 +72,9 @@ function install_kustomize() {
 }
 
 function install_myrmidon() {
-  if [ $(command_exists myrmidon.sh) -eq 0 ]; then
+  if [ -d $HOME/scripts/myrmidon ]; then
+    printf " -> Found myrmidon, skipping... \n"
+  else
     printf " -> Installing myrmidon... \n"
     mkdir -p $HOME/scripts
     git clone -q https://github.com/moustacheful/myrmidon.git $HOME/scripts/myrmidon

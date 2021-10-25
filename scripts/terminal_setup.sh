@@ -80,50 +80,59 @@ function replace_zsh_configs() {
 
 function add_terminal_fonts() {
   printf "Adding pretty terminal fonts... \n"
+  local INSTALLED_FONTS=0
   mkdir -p $HOME/.fonts
 
   pushd /tmp
   printf " -> VictorMono NF \n"
   if [ -d ~/.fonts/VictorMono ]; then
-    printf " -> Found ~/.fonts/VictorMono, skipping... \n"
+    printf "   -> Found ~/.fonts/VictorMono, skipping... \n"
   else
     curl -fsSLO https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/VictorMono.zip
     unzip VictorMono.zip -d ~/.fonts/VictorMono
+    INSTALLED_FONTS=1
   fi
 
   printf " -> FiraCode NF \n"
   if [ -d ~/.fonts/FiraCode ]; then
-    printf " -> Found ~/.fonts/FiraCode, skipping... \n"
+    printf "   -> Found ~/.fonts/FiraCode, skipping... \n"
   else
     curl -fsSLO https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
     unzip FiraCode.zip -d ~/.fonts/FiraCode
+    INSTALLED_FONTS=1
   fi
 
   printf " -> Hasklug NF \n"
   if [ -d ~/.fonts/Hasklig ]; then
-    printf " -> Found ~/.fonts/Hasklug, skipping... \n"
+    printf "   -> Found ~/.fonts/Hasklug, skipping... \n"
   else
     curl -fsSLO https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hasklig.zip
     unzip Hasklig.zip -d ~/.fonts/Hasklig
+    INSTALLED_FONTS=1
   fi
 
   printf " -> JetBrains NF \n"
   if [ -d ~/.fonts/JetBrainsMono ]; then
-    printf " -> Found ~/.fonts/JetBrains, skipping... \n"
+    printf "   -> Found ~/.fonts/JetBrains, skipping... \n"
   else
     curl -fsSLO https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
     unzip JetBrainsMono.zip -d ~/.fonts/JetBrainsMono
+    INSTALLED_FONTS=1
   fi
 
   printf " -> Get more at: https://www.nerdfonts.com/font-downloads \n"
   job_done
 
-  printf "Refreshing font-cache... \n"
-    fc-cache -fv
-  job_done
+  if [ $INSTALLED_FONTS -eq 1 ]; then
+    printf "Refreshing font-cache... \n"
+      fc-cache -fv
+      job_done
 
-  printf "Cleaning up zip archives... \n"
-    rm {VictorMono,FiraCode,Hasklig,JetBrainsMono}.zip
-  job_done
+    printf "Cleaning up zip archives... \n"
+      rm {VictorMono,FiraCode,Hasklig,JetBrainsMono}.zip
+
+    job_done
+  fi
+
   popd
 }
