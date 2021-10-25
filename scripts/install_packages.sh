@@ -40,7 +40,7 @@ function add_apt_sources() {
       printf " -> Adding source for %s in %s... \n" "$APP" "$SOURCES_FOLDER/$FILE"
       echo "$SRC" | sudo tee "$SOURCES_FOLDER/$FILE"
     fi
-  done < $SCRIPT_DIR/apt/apt_sources.txt
+  done < $SCRIPT_DIR/apt/sources.txt
 
   printf " -> Fixing docker.list for %s... \n" "$CODENAME"
   sudo sh -c "sed -i 's/LSB_RELEASE_CS/${CODENAME}/g' /etc/apt/sources.list.d/docker.list"
