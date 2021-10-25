@@ -1,0 +1,30 @@
+[
+  {
+    "name": "(default) Andrew Stone",
+    "command": "gtk-launch Zoom.desktop 'zoommtg://zoom.us/join?confno=99612858599&pwd=TUNOdzEzVGFMeWRFU3Fyc1VDWDF0dz09'"
+  },
+  {
+    "name": "Anthony Butt / Tony / Cheeks",
+    "command": "gtk-launch Zoom.desktop 'zoommtg://zoom.us/join?confno=7844951501&pwd=QXFDclN3d1lybDFkeEl0T3lPNnZOZz09'"
+  },
+  {
+    "name": "Clint Harris",
+    "command": "gtk-launch Zoom.desktop 'zoommtg://zoom.us/join?confno=6374310220&pwd=TE1QRTBpU1lwK1hNNzU4Q3RRekZVdz09'"
+  },
+  {
+    "name": "Doug Twyman",
+    "command": "gtk-launch Zoom.desktop 'zoommtg://zoom.us/join?confno=9506081290&pwd=a09KV1VmWXRPS0h3c05ORllRR2ZYZz09'"
+  },
+  {
+    "name": "Lucas Pick",
+    "command": "gtk-launch Zoom.desktop 'zoommtg://zoom.us/join?confno=5976333518&pwd=cXJZL0pvK1o4K0NvL3VrcUdieXRPZz09'"
+  },
+	{
+		"name": "Marc Miller",
+		"command": "gtk-launch Zoom.desktop 'zoommtg://zoom.us/join?confno=7309773575&pwd=eGg1TWxjK2dMMlJoYm9henBhWHZIQT09'"
+	},
+	{
+		"name": "Philip Chapin",
+		"command": "gtk-launch Zoom.desktop 'zoommtg://zoom.us/join?confno=2341542041&pwd=V0FQVCtiNEFxVEg2ZkNDMEM0SUcwQT09'"
+	}
+]
