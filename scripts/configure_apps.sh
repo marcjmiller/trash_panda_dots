@@ -132,4 +132,6 @@ function configure_keyboard() {
 
 function configure_keyboard_shortcuts() {
   printf "Setting keyboard shortcuts... \n"
+  
+  job_done
 }
