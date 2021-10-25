@@ -8,9 +8,9 @@ The purpose of this repo is to quickly configure a new machine for use by DevSec
 
 ### Installation
 1. Clone the repository  directory
-```git clone https://github.com/marcjmiller/trash_panda_dots```
+```git clone https://github.com/marcjmiller/trash_panda_dots $HOME/.dotfiles```
 2. Change to the directory
-```cd trash_panda_dots```
+```cd $HOME/.dotfiles```
 3. Run
 ```./scripts/bootstrap.sh```
 
@@ -31,6 +31,7 @@ The purpose of this repo is to quickly configure a new machine for use by DevSec
 - npm
 - ohmyzsh (and plugins)
 - python3
+- rofi
 - slack
 - teams
 - vs code
