@@ -2,6 +2,12 @@
 function config_apps() {
   copy_configs
   configure_applications
+  if [ ${USE_BLUETOOTH} -eq 1 ]; then
+    systemctl --user daemon-reload
+    systemctl --user --now disable pulseaudio.{service,socket}
+    systemctl --user mask pulseaudio
+    systemctl --user --now enable pipewire-media-session.service
+  fi
   configure_preferred_apps
   configure_keyboard
 }

@@ -19,7 +19,8 @@ PACKAGE_LIST=()
 readarray PACKAGE_LIST < $SCRIPT_DIR/apt/packages.txt
 
 # Some starter Boolean vars, 0 = false, 1 = true
-IS_LAPTOP=0   # Whether installing on a laptop or not
+IS_LAPTOP=${IS_LAPTOP:-0}           ! -z# Whether installing on a laptop or not
+USE_BLUETOOTH=${USE_BLUETOOTH:-0}   # Whether setting up for Bluetooth with pipewire
 
 # Source all of our helper scripts
 source $SCRIPT_DIR/functions.sh
