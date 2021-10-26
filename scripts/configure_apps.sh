@@ -78,7 +78,7 @@ function copy_configs() {
 function configure_appgate() {
   new_line
   printf " -> appgate \n"
-  appgate --url appgate://cnap-connect.code.cdl.af.mil/eyJwcm9maWxlTmFtZSI6IlBsYXRmb3JtMSAtIFNTTyIsInNwYSI6eyJtb2RlIjoiVENQIiwibmFtZSI6IlBsYXRmb3JtMS1TU08iLCJrZXkiOiJkNjJhMjQ3ODc0ZGIxY2IxOGZmYjFiNWI4OWQzZTM0ZTZkY2NjMzliOGY1MTI0NDBmN2Q2ZTFmYzlkNGMwMDM2In0sImNhRmluZ2VycHJpbnQiOiJkMzc5NmI4OTczNTU5N2E2OWNlNzVlMjQ0NjAzZmU3OGRlZDU0ZTZlYmJkYTQ1ZWM4NDE2OGRiNWUyNjBjN2FhIiwiaWRlbnRpdHlQcm92aWRlck5hbWUiOiJTU08gLSBQbGF0Zm9ybSAxIn0= --novalidate
+  appgate --url appgate://cnap-connect.code.cdl.af.mil/eyJwcm9maWxlTmFtZSI6IlBsYXRmb3JtMSAtIFNTTyIsInNwYSI6eyJtb2RlIjoiVENQIiwibmFtZSI6IlBsYXRmb3JtMS1TU08iLCJrZXkiOiJkNjJhMjQ3ODc0ZGIxY2IxOGZmYjFiNWI4OWQzZTM0ZTZkY2NjMzliOGY1MTI0NDBmN2Q2ZTFmYzlkNGMwMDM2In0sImNhRmluZ2VycHJpbnQiOiJkMzc5NmI4OTczNTU5N2E2OWNlNzVlMjQ0NjAzZmU3OGRlZDU0ZTZlYmJkYTQ1ZWM4NDE2OGRiNWUyNjBjN2FhIiwiaWRlbnRpdHlQcm92aWRlck5hbWUiOiJTU08gLSBQbGF0Zm9ybSAxIn0= --novalidate &> /dev/null &
 }
 
 function configure_neovim() {
@@ -89,22 +89,34 @@ function configure_neovim() {
 }
 
 function configure_docker() {
+  new_line
   printf " -> docker \n"
   printf "   -> Adding $(whoami) to the docker group... \n"
   sh -c "sudo usermod -aG docker $(whoami)"
 }
 
 function configure_vscode() {
+  new_line
+  printf " -> vscode \n"
   while read -a EXT; do
-    printf "code --install-extension %s \n" "$EXT"
+    printf "   -> %s \n" "$EXT"
+    code --install-extension "$EXT" &> /dev/null
   done < $SCRIPT_DIR/vscode/extensions.txt
 }
 
 
 function configure_preferred_apps() {
   printf "Setting app defaults... \n"
-  printf " -> kitty \n"
-  sudo update-alternatives --set x-terminal-emulator $(which kitty)
+  printf " -> kitty as default x-terminal-emulator \n"
+  sudo update-alternatives --quiet --set x-terminal-emulator $(which kitty)
+
+  printf " -> brave-browser as default x-www-browser \n"
+  sudo update-alternatives --quiet --set x-www-browser $(which brave-browser-stable)
+
+  printf " -> neovim as default vi/vim \n"
+  sudo update-alternatives --quiet --set vi $(which nvim)
+  sudo update-alternatives --quiet --set vim $(which nvim)
+
   job_done
 }
 
@@ -132,6 +144,6 @@ function configure_keyboard() {
 
 function configure_keyboard_shortcuts() {
   printf "Setting keyboard shortcuts... \n"
-  
+
   job_done
 }
