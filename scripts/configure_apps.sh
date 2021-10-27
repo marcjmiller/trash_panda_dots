@@ -14,7 +14,12 @@ function config_apps() {
 
 function configure_applications() {
   printf "Configuring apps... \n"
-  configure_appgate # TODO: troubleshoot appgate config, it doesn't work under docker, the window hangs. VM maybe?
+  configure_appgate
+
+  if [ ${USE_CAC} -eq 1 ]; then
+    configure_brave
+  fi
+
   configure_docker
   configure_neovim
   configure_vscode
@@ -85,6 +90,15 @@ function configure_appgate() {
   new_line
   printf " -> appgate \n"
   appgate --url appgate://cnap-connect.code.cdl.af.mil/eyJwcm9maWxlTmFtZSI6IlBsYXRmb3JtMSAtIFNTTyIsInNwYSI6eyJtb2RlIjoiVENQIiwibmFtZSI6IlBsYXRmb3JtMS1TU08iLCJrZXkiOiJkNjJhMjQ3ODc0ZGIxY2IxOGZmYjFiNWI4OWQzZTM0ZTZkY2NjMzliOGY1MTI0NDBmN2Q2ZTFmYzlkNGMwMDM2In0sImNhRmluZ2VycHJpbnQiOiJkMzc5NmI4OTczNTU5N2E2OWNlNzVlMjQ0NjAzZmU3OGRlZDU0ZTZlYmJkYTQ1ZWM4NDE2OGRiNWUyNjBjN2FhIiwiaWRlbnRpdHlQcm92aWRlck5hbWUiOiJTU08gLSBQbGF0Zm9ybSAxIn0= --novalidate &> /dev/null &
+}
+
+function configure_brave() {
+  new_line
+  printf " -> brave-browser \n"
+  sh -c "mkdir -p $HOME/.pki/nssdb"
+  sh -c "certutil -d $HOME/.pki/nssdb -N --empty-password"
+  sh -c "modutil -dbdir sql:$HOME/.pki/nssdb/ -list"
+  sh -c "modutil -dbdir sql:$HOME/.pki/nssdb/ -add \"CAC Module\" -libfile $(whereis opensc-pkcs11.so) -force"
 }
 
 function configure_neovim() {

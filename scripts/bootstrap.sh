@@ -53,7 +53,7 @@ function main {
       -c | --cac)
         printf " -> Setting up CAC tools \n"
         USE_CAC=1
-        PACKAGE_LIST+=( libnss3-tools libpcsclite1 pcscd pcsc-tools libpam-pkcs11 seahorse )
+        PACKAGE_LIST+=( libnss3-tools libpcsclite1 pcscd pcsc-tools opensc-pkcs11 )
       ;;
 
       -s | --skip-apt)
