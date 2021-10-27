@@ -1,5 +1,5 @@
 Appgate-SDP,appgate,https://bin.appgate-sdp.com/5.4/client/appgate-sdp_5.4.3_amd64.deb
-Mattermost,mattermost-desktop,https://github.com/mattermost/desktop/releases/download/v5.0.0/mattermost-desktop-5.0.0-linux-amd64.deb
+Mattermost,mattermost-desktop,https://github.com/mattermost/desktop/releases/download/v5.0.1/mattermost-desktop-5.0.1-linux-amd64.deb
 Slack,slack,https://downloads.slack-edge.com/releases/linux/4.20.0/prod/x64/slack-desktop-4.20.0-amd64.deb
 Teams,teams,https://packages.microsoft.com/repos/ms-teams/pool/main/t/teams/teams_1.4.00.26453_amd64.deb
 Zoom,zoom,https://zoom.us/client/latest/zoom_amd64.deb
