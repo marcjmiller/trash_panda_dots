@@ -99,8 +99,10 @@ function install_package() {
 }
 
 function apt_update() {
-  printf " -> Updating apt repositories... \n"
-  sudo sh -c "DEBIAN_FRONTEND=noninteractive apt-get -qq update"
+  printf " -> Updating apt repositories... "
+  sudo sh -c "DEBIAN_FRONTEND=noninteractive apt-get -qq update" &
+  get_status
+
   job_done
 }
 
@@ -115,6 +117,24 @@ function new_line() {
 
 function job_done() {
   printf "Done! \n\n"
+}
+
+function get_status() {
+  wait $!
+
+  if [ $? -eq 0 ]; then
+    success
+  else
+    fail
+  fi
+}
+
+function success() {
+  printf " ✓ \n"
+}
+
+function fail() {
+  printf " ✗ \n"
 }
 
 function pushd {
