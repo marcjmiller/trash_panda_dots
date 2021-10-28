@@ -14,8 +14,9 @@ function install_apt {
     if [[ $(package_installed ${PACKAGE}) -gt 0 ]]; then
       printf " -> %s already installed, skipping... \n" "${PACKAGE}"
     else
-      printf " -> Installing %s ... \n" "$PACKAGE"
-      install_package "${PACKAGE}"
+      printf " -> Installing %s ... " "$PACKAGE"
+      install_package "${PACKAGE}" &
+      get_status
     fi
   done
   job_done
