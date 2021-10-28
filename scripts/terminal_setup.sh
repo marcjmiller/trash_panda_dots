@@ -14,13 +14,16 @@ function setup_terminal() {
 function install_oh_my_zsh() {
   printf "Checking for Oh My Zsh... \n"
   if [ -d $HOME/.oh-my-zsh ]; then
-    printf " -> Found Oh My Zsh, skipping... \n"
+    printf " -> Found Oh My Zsh, skipping..."
+    success
   else
-    printf " -> Oh My Zsh not found, installing... \n"
-    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    printf " -> Oh My Zsh not found, installing..."
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended > /dev/null 2>&1 &
+    get_status
     if [ -f "$HOME/.zshrc" ]; then
-      printf "Clearing stock oh-my-zsh config files... \n"
-      mv $HOME/.zshrc $HOME/.zshrc.stock
+      printf "Clearing stock oh-my-zsh config files..."
+      mv $HOME/.zshrc $HOME/.zshrc.stock &
+      get_status
       job_done
     fi
   fi
@@ -34,10 +37,12 @@ function clone_omz_plugins() {
     PLUGIN_URL=${PLUGIN[1]}
 
     if [ -d "${ZSH_PLUGINS_DIR}/${PLUGIN_NAME}" ]; then
-      printf " -> Found %s, skipping... \n" "${PLUGIN_NAME}"
+      printf " -> Found %s, skipping..." "${PLUGIN_NAME}"
+      success
     else
-      printf " -> Cloning %s... \n" "${PLUGIN_NAME}"
-      git clone ${PLUGIN_URL} ${ZSH_PLUGINS_DIR}/${PLUGIN_NAME} &> /dev/null
+      printf " -> Cloning %s..." "${PLUGIN_NAME}"
+      git clone ${PLUGIN_URL} ${ZSH_PLUGINS_DIR}/${PLUGIN_NAME} &> /dev/null &
+      get_status
     fi
   done < $SCRIPT_DIR/ohmyzsh/plugins.txt
   job_done
@@ -50,10 +55,12 @@ function clone_omz_themes() {
     THEME_URL=${THEME[1]}
 
     if [ -d "${ZSH_THEMES_DIR}/${THEME_NAME}" ]; then
-      printf " -> Found %s, skipping... \n" "${THEME_NAME}"
+      printf " -> Found %s, skipping..." "${THEME_NAME}"
+      success
     else
-      printf " -> Cloning %s... \n" "${THEME_NAME}"
-      git clone --depth=1 ${THEME_URL} ${ZSH_THEMES_DIR}/${THEME_NAME} &> /dev/null
+      printf " -> Cloning %s..." "${THEME_NAME}"
+      git clone --depth=1 ${THEME_URL} ${ZSH_THEMES_DIR}/${THEME_NAME} &> /dev/null &
+      get_status
     fi
   done < $SCRIPT_DIR/ohmyzsh/themes.txt
   job_done
@@ -63,16 +70,19 @@ function replace_zsh_configs() {
   printf "Copying Trash Panda zsh configs... \n"
   for FILE in ${DOTS_DIR}/configs/zsh/*; do
     if [ -f ${HOME}/.$(basename ${FILE}) ]; then
-      printf " -> Found .$(basename ${FILE}), skipping... \n"
+      printf " -> Found .$(basename ${FILE}), skipping..."
+      success
     else
-      printf " -> Copying .%s...\n" $(basename ${FILE})
-      cp "$FILE" "$HOME/.$(basename ${FILE})"
+      printf " -> Copying .%s..." $(basename ${FILE})
+      cp "$FILE" "$HOME/.$(basename ${FILE})" &
+      get_status
     fi
   done
   job_done
 
-  printf "Updating shell... \n"
-  sudo sh -c "chsh -s $(which zsh) $(whoami)"
+  printf "Updating shell..."
+  sudo sh -c "chsh -s $(which zsh) $(whoami)" &
+  get_status
 
   printf " -> You will see the changes when you open a new terminal \n"
   job_done
@@ -86,50 +96,58 @@ function add_terminal_fonts() {
   pushd /tmp
   printf " -> VictorMono NF \n"
   if [ -d ~/.fonts/VictorMono ]; then
-    printf "   -> Found ~/.fonts/VictorMono, skipping... \n"
+    printf "   -> Found ~/.fonts/VictorMono, skipping..."
+    sucess
   else
     curl -fsSLO https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/VictorMono.zip
-    unzip VictorMono.zip -d ~/.fonts/VictorMono
+    unzip -qq VictorMono.zip -d ~/.fonts/VictorMono &
+    get_status
     INSTALLED_FONTS=1
   fi
 
   printf " -> FiraCode NF \n"
   if [ -d ~/.fonts/FiraCode ]; then
-    printf "   -> Found ~/.fonts/FiraCode, skipping... \n"
+    printf "   -> Found ~/.fonts/FiraCode, skipping..."
+    success
   else
     curl -fsSLO https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip
-    unzip FiraCode.zip -d ~/.fonts/FiraCode
+    unzip -qq FiraCode.zip -d ~/.fonts/FiraCode &
+    get_status
     INSTALLED_FONTS=1
   fi
 
   printf " -> Hasklug NF \n"
   if [ -d ~/.fonts/Hasklig ]; then
-    printf "   -> Found ~/.fonts/Hasklug, skipping... \n"
+    printf "   -> Found ~/.fonts/Hasklug, skipping..."
+    success
   else
     curl -fsSLO https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hasklig.zip
-    unzip Hasklig.zip -d ~/.fonts/Hasklig
+    unzip -qq Hasklig.zip -d ~/.fonts/Hasklig &
+    get_status
     INSTALLED_FONTS=1
   fi
 
   printf " -> JetBrains NF \n"
   if [ -d ~/.fonts/JetBrainsMono ]; then
-    printf "   -> Found ~/.fonts/JetBrains, skipping... \n"
+    printf "   -> Found ~/.fonts/JetBrains, skipping..."
+    success
   else
     curl -fsSLO https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
-    unzip JetBrainsMono.zip -d ~/.fonts/JetBrainsMono
+    unzip -qq JetBrainsMono.zip -d ~/.fonts/JetBrainsMono &
+    get_status
     INSTALLED_FONTS=1
   fi
 
-  printf " -> Get more at: https://www.nerdfonts.com/font-downloads \n"
+  printf " -> Get more fonts at: https://www.nerdfonts.com/font-downloads \n"
   job_done
 
   if [ $INSTALLED_FONTS -eq 1 ]; then
-    printf "Refreshing font-cache... \n"
-      fc-cache -fv
-      job_done
-
-    printf "Cleaning up zip archives... \n"
-      rm {VictorMono,FiraCode,Hasklig,JetBrainsMono}.zip
+    printf "Refreshing font-cache..."
+    fc-cache -f &
+    get_status
+    printf "Cleaning up zip archives..."
+    rm {VictorMono,FiraCode,Hasklig,JetBrainsMono}.zip
+    success
 
     job_done
   fi

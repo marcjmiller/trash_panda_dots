@@ -110,23 +110,26 @@ function configure_brave() {
 function configure_neovim() {
   new_line
   printf " -> neovim \n"
-  printf "   -> Adding vim-plug... \n"
-  sh -c 'curl -fsLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  printf "   -> Adding vim-plug..."
+  sh -c 'curl -fsLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim' &
+  get_status
 }
 
 function configure_docker() {
   new_line
   printf " -> docker \n"
-  printf "   -> Adding $(whoami) to the docker group... \n"
-  sh -c "sudo usermod -aG docker $(whoami)"
+  printf "   -> Adding $(whoami) to the docker group..."
+  sh -c "sudo usermod -aG docker $(whoami)" &
+  get_status
 }
 
 function configure_vscode() {
   new_line
   printf " -> vscode \n"
   while read -a EXT; do
-    printf "   -> %s \n" "$EXT"
-    code --install-extension "$EXT" &> /dev/null
+    printf "   -> Installing %s ..." "$EXT"
+    code --install-extension "$EXT" &> /dev/null &
+    get_status
   done < $SCRIPT_DIR/vscode/extensions.txt
 }
 

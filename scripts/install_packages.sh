@@ -23,8 +23,9 @@ function install_apt {
 }
 
 function add_gpg_keys() {
-  printf "Adding gpg keys... \n"
-  sudo sh -c "cp -u $DOTS_DIR/scripts/apt/gpg_keys/* /usr/share/keyrings/"
+  printf "Adding gpg keys..."
+  sudo sh -c "cp -u $DOTS_DIR/scripts/apt/gpg_keys/* /usr/share/keyrings/" &
+  get status
   job_done
 }
 
@@ -36,15 +37,18 @@ function add_apt_sources() {
     FILE=${SOURCE[2]}
 
     if [ -f "$SOURCES_FOLDER/$FILE" ]; then
-      printf " -> Found %s, skipping... \n" "$FILE"
+      printf " -> Found %s, skipping..." "$FILE"
+      success
     else
-      printf " -> Adding source for %s in %s... \n" "$APP" "$SOURCES_FOLDER/$FILE"
-      echo "$SRC" | sudo tee "$SOURCES_FOLDER/$FILE"
+      printf " -> Adding source for %s in %s..." "$APP" "$SOURCES_FOLDER/$FILE"
+      echo "$SRC" | sudo tee "$SOURCES_FOLDER/$FILE" &
+      get_status
     fi
   done < $SCRIPT_DIR/apt/sources.txt
 
-  printf " -> Fixing docker.list for %s... \n" "$CODENAME"
-  sudo sh -c "sed -i 's/LSB_RELEASE_CS/${CODENAME}/g' /etc/apt/sources.list.d/docker.list"
+  printf " -> Fixing docker.list for %s..." "$CODENAME"
+  sudo sh -c "sed -i 's/LSB_RELEASE_CS/${CODENAME}/g' /etc/apt/sources.list.d/docker.list" &
+  get_status
   job_done
 }
 
@@ -55,10 +59,12 @@ function install_debs() {
   printf "Installing debs... \n"
   for DEB in `ls $HOME/.dotfiles/apt/debs/*.deb`; do
     if [ -f "$DEB" ]; then
-      printf "   -> Installing %s... \n" "$(basename $DEB)"
-      sudo sh -c "DEBIAN_FRONTEND=noninteractive apt-get -qq install $DEB"
+      printf "   -> Installing %s..." "$(basename $DEB)"
+      install_package $DEB &
+      get_status
     else
-      printf " -> No debs found to install... \n"
+      printf " -> No debs found to install..."
+      success
     fi
   done
   job_done
@@ -75,10 +81,12 @@ function download_debs() {
       URL=${DEB[2]}
 
       if [ $(command_exists "$CMD") -gt 0 ]; then
-        printf "   -> %s already installed, skipping... \n" "$APP"
+        printf "   -> %s already installed, skipping..." "$APP"
+        success
       else
-        printf "   -> Downloading %s... \n" "$APP"
-        curl -fSsLlO "${URL}"
+        printf "   -> Downloading %s..." "$APP"
+        curl -fSsLlO "${URL}" &
+        get_status
       fi
     done < $SCRIPT_DIR/apt/debs.txt
     job_done
