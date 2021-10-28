@@ -3,7 +3,7 @@
 declare -a NEEDED_STIGS
 
 function check_stigs() {
-  print " -> Checking STIGs... \n"
+  printf " -> Checking STIGs... \n"
 
   ########## v100539 ##########
   # The Ubuntu operating system must not have the Network Information Service (NIS) package installed.

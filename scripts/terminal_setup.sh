@@ -41,7 +41,7 @@ function clone_omz_plugins() {
       success
     else
       printf " -> Cloning %s..." "${PLUGIN_NAME}"
-      git clone ${PLUGIN_URL} ${ZSH_PLUGINS_DIR}/${PLUGIN_NAME} &> /dev/null &
+      git clone -q ${PLUGIN_URL} ${ZSH_PLUGINS_DIR}/${PLUGIN_NAME} &> /dev/null &
       get_status
     fi
   done < $SCRIPT_DIR/ohmyzsh/plugins.txt
@@ -59,7 +59,7 @@ function clone_omz_themes() {
       success
     else
       printf " -> Cloning %s..." "${THEME_NAME}"
-      git clone --depth=1 ${THEME_URL} ${ZSH_THEMES_DIR}/${THEME_NAME} &> /dev/null &
+      git clone -q --depth=1 ${THEME_URL} ${ZSH_THEMES_DIR}/${THEME_NAME} &> /dev/null &
       get_status
     fi
   done < $SCRIPT_DIR/ohmyzsh/themes.txt

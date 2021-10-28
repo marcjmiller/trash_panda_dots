@@ -25,7 +25,7 @@ function install_apt {
 function add_gpg_keys() {
   printf "Adding gpg keys..."
   sudo sh -c "cp -u $DOTS_DIR/scripts/apt/gpg_keys/* /usr/share/keyrings/" &
-  get status
+  get_status
   job_done
 }
 
