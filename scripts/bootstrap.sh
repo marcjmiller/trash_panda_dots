@@ -28,6 +28,7 @@ source $SCRIPT_DIR/install_packages.sh
 source $SCRIPT_DIR/install_tools.sh
 source $SCRIPT_DIR/terminal_setup.sh
 source $SCRIPT_DIR/configure_apps.sh
+source $SCRIPT_DIR/p1_stig.sh
 
 function main {
   printf "Parsing script args... \n"

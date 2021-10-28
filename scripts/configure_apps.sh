@@ -166,7 +166,9 @@ function configure_keyboard() {
 
 function apply_p1_stig() {
   printf " -> Applying Platform One STIGs \n"
-  sudo sh -c "curl -sL https://gist.githubusercontent.com/tonybutt/ebbe05b26acb5e5df5a171db8a91d7a4/raw/a4f9054f43baf1ab7036cea2839af54a06c9e096/apply-p1-stig-ubuntu.sh | bash"
+  check_stigs
+  apply_stigs
+  # sudo sh -c "curl -sL https://gist.githubusercontent.com/tonybutt/ebbe05b26acb5e5df5a171db8a91d7a4/raw/a4f9054f43baf1ab7036cea2839af54a06c9e096/apply-p1-stig-ubuntu.sh | bash"
   job_done
 }
 
