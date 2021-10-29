@@ -172,7 +172,7 @@ function configure_keyboard() {
 }
 
 function apply_p1_stig() {
-  printf " -> Applying Platform One STIGs \n"
+  printf "Applying Platform One STIGs \n"
   check_stigs
   apply_stigs
   job_done

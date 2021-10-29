@@ -133,7 +133,7 @@ function check_stigs() {
 }
 
 function apply_stigs() {
-  printf "   -> Applying STIGs... \n"
+  printf " -> Applying STIGs... \n"
   for STIG in "${NEEDED_STIGS[@]}"; do
     printf "     -> %s... \n" "$STIG"
     $STIG
@@ -142,21 +142,21 @@ function apply_stigs() {
 
 v100539() {
   # The Ubuntu operating system must not have the Network Information Service (NIS) package installed.
-  printf "       -> removing nis..."
+  printf "     -> removing nis..."
   sudo apt-get -qq remove nis &
   get_status
 }
 
 v100541() {
   # The Ubuntu operating system must not have the rsh-server package installed.
-  printf "       -> removing rsh-server..."
+  printf "     -> removing rsh-server..."
   sudo apt-get -qq remove rsh-server &
   get_status
 }
 
 v100581() {
   # The Ubuntu operating system must not have the telnet package installed.
-  printf "       -> removing telnetd..."
+  printf "     -> removing telnetd..."
   sudo apt-get -qq remove telnetd &
   get_status
 }
@@ -215,7 +215,7 @@ v100847() {
 v100849() {
   # The Ubuntu operating system must use SSH to protect the confidentiality and integrity of transmitted information unless otherwise protected
   # by alternative physical safeguards, such as, at a minimum, a Protected Distribution System (PDS).
-  printf "       -> ssh..."
+  printf "     -> Installing ssh..."
   install_package ssh &
   get_status
   sudo systemctl enable sshd.service
@@ -231,15 +231,15 @@ v100851 () {
 
 v100855() {
   # The Ubuntu operating system must not allow unattended or automatic login via ssh.
-  printf "       -> libpam-pkcs11..."
+  printf "     -> Installing libpam-pkcs11..."
   install_package libpam-pkcs11 &
   get_status
-  sudo echo "use_mappers=pwent" >> /etc/pam_pkcs11/pam_pkcs11.conf
+  echo "use_mappers=pwent" | sudo tee /etc/pam_pkcs11/pam_pkcs11.conf &> /dev/null
 }
 
 v100861() {
   # The Ubuntu operating system must accept Personal Identity Verification (PIV) credentials.
-  printf "       -> opensc-pkcs11..."
+  printf "     -> Installing opensc-pkcs11..."
   install_package opensc-pkcs11 &
   get_status
 }
