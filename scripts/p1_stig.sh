@@ -142,17 +142,23 @@ function apply_stigs() {
 
 v100539() {
   # The Ubuntu operating system must not have the Network Information Service (NIS) package installed.
-  sudo apt-get remove nis
+  printf "       -> removing nis..."
+  sudo apt-get -qq remove nis &
+  get_status
 }
 
 v100541() {
   # The Ubuntu operating system must not have the rsh-server package installed.
-  sudo apt-get remove rsh-server
+  printf "       -> removing rsh-server..."
+  sudo apt-get -qq remove rsh-server &
+  get_status
 }
 
 v100581() {
   # The Ubuntu operating system must not have the telnet package installed.
-  sudo apt-get remove telnetd
+  printf "       -> removing telnetd..."
+  sudo apt-get -qq remove telnetd &
+  get_status
 }
 
 v100589() {
@@ -209,7 +215,9 @@ v100847() {
 v100849() {
   # The Ubuntu operating system must use SSH to protect the confidentiality and integrity of transmitted information unless otherwise protected
   # by alternative physical safeguards, such as, at a minimum, a Protected Distribution System (PDS).
-  sudo apt-get install ssh
+  printf "       -> ssh..."
+  install_package ssh &
+  get_status
   sudo systemctl enable sshd.service
   sudo systemctl start sshd.service
 }
@@ -223,11 +231,15 @@ v100851 () {
 
 v100855() {
   # The Ubuntu operating system must not allow unattended or automatic login via ssh.
-  sudo apt-get install libpam-pkcs11
+  printf "       -> libpam-pkcs11..."
+  install_package libpam-pkcs11 &
+  get_status
   sudo echo "use_mappers=pwent" >> /etc/pam_pkcs11/pam_pkcs11.conf
 }
 
 v100861() {
   # The Ubuntu operating system must accept Personal Identity Verification (PIV) credentials.
-  sudo apt-get install opensc-pkcs11
+  printf "       -> opensc-pkcs11..."
+  install_package opensc-pkcs11 &
+  get_status
 }

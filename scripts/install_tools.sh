@@ -93,7 +93,7 @@ function install_myrmidon() {
     success
   else
     printf " -> Installing myrmidon..."
-    git clone -q https://github.com/moustacheful/myrmidon.git --create-dirs $HOME/scripts/myrmidon &
+    git clone -q https://github.com/moustacheful/myrmidon.git $HOME/scripts/myrmidon &
     get_status
   fi
 }

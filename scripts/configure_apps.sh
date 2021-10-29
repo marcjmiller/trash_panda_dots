@@ -18,7 +18,7 @@ function configure_applications() {
   printf "Configuring apps... \n"
   configure_appgate
 
-  if [ ${USE_CAC} -eq 1 ]; then
+  if [ "$USE_CAC" -eq 1 ]; then
     configure_brave
   fi
 

@@ -94,8 +94,9 @@ function add_terminal_fonts() {
   mkdir -p $HOME/.fonts
 
   pushd /tmp
-  printf " -> VictorMono NF \n"
+  printf " -> VictorMono NF"
   if [ -d ~/.fonts/VictorMono ]; then
+    new_line
     printf "   -> Found ~/.fonts/VictorMono, skipping..."
     sucess
   else
@@ -105,8 +106,9 @@ function add_terminal_fonts() {
     INSTALLED_FONTS=1
   fi
 
-  printf " -> FiraCode NF \n"
+  printf " -> FiraCode NF"
   if [ -d ~/.fonts/FiraCode ]; then
+    new_line
     printf "   -> Found ~/.fonts/FiraCode, skipping..."
     success
   else
@@ -116,9 +118,10 @@ function add_terminal_fonts() {
     INSTALLED_FONTS=1
   fi
 
-  printf " -> Hasklug NF \n"
+  printf " -> Hasklug NF"
   if [ -d ~/.fonts/Hasklig ]; then
     printf "   -> Found ~/.fonts/Hasklug, skipping..."
+    new_line
     success
   else
     curl -fsSLO https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hasklig.zip
@@ -127,8 +130,9 @@ function add_terminal_fonts() {
     INSTALLED_FONTS=1
   fi
 
-  printf " -> JetBrains NF \n"
+  printf " -> JetBrains NF"
   if [ -d ~/.fonts/JetBrainsMono ]; then
+    new_line
     printf "   -> Found ~/.fonts/JetBrains, skipping..."
     success
   else

@@ -12,7 +12,8 @@ function install_apt {
 
   for PACKAGE in ${PACKAGE_LIST[@]}; do
     if [[ $(package_installed ${PACKAGE}) -gt 0 ]]; then
-      printf " -> %s already installed, skipping... \n" "${PACKAGE}"
+      printf " -> %s already installed, skipping..." "${PACKAGE}"
+      success
     else
       printf " -> Installing %s ... " "$PACKAGE"
       install_package "${PACKAGE}" &
@@ -22,7 +23,7 @@ function install_apt {
   job_done
 }
 
-function add_gpg_keys() {
+function add_gpg_keys() { # TODO: Use a for-loop here to do them one-by-one with statuses for better output
   printf "Adding gpg keys..."
   sudo sh -c "cp -u $DOTS_DIR/scripts/apt/gpg_keys/* /usr/share/keyrings/" &
   get_status
@@ -47,7 +48,7 @@ function add_apt_sources() {
   done < $SCRIPT_DIR/apt/sources.txt
 
   printf " -> Fixing docker.list for %s..." "$CODENAME"
-  sudo sh -c "sed -i 's/LSB_RELEASE_CS/${CODENAME}/g' /etc/apt/sources.list.d/docker.list" &
+  sudo sh -c "sed -i 's/LSB_RELEASE_CS/${CODENAME}/g' /etc/apt/sources.list.d/docker.list" &> /dev/null &
   get_status
   job_done
 }
