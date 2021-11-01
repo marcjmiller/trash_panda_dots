@@ -93,8 +93,9 @@ function main {
   printf "That's all folks! \n"
   new_line
 
-  trap cleanup EXIT
 }
+
+trap cleanup EXIT
 
 function cleanup {
   tput cnorm
