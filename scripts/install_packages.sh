@@ -42,7 +42,7 @@ function add_apt_sources() {
       success
     else
       printf " -> Adding source for %s in %s..." "$APP" "$SOURCES_FOLDER/$FILE"
-      echo "$SRC" | sudo tee "$SOURCES_FOLDER/$FILE" &
+      echo "$SRC" | sudo tee "$SOURCES_FOLDER/$FILE" > /dev/null &
       get_status
     fi
   done < $SCRIPT_DIR/apt/sources.txt
