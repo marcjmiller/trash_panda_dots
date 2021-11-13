@@ -32,6 +32,7 @@ source $SCRIPT_DIR/configure_apps.sh
 source $SCRIPT_DIR/p1_stig.sh
 
 function main {
+  tput civis
   printf "Parsing script args... \n"
   for arg in "$@"; do
     case "$arg" in
@@ -91,6 +92,13 @@ function main {
   new_line
   printf "That's all folks! \n"
   new_line
+
+}
+
+trap cleanup EXIT
+
+function cleanup {
+  tput cnorm
 }
 
 main ${@}
