@@ -2,3 +2,4 @@ Brave,deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=
 Docker,deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu LSB_RELEASE_CS stable,docker.list
 Kubernetes,deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main,kubernetes.list
 VS Code,deb [signed-by=/usr/share/keyrings/microsoft.gpg arch=amd64] https://packages.microsoft.com/repos/code stable main,vscode.list
+Signal,deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main,signal-xenial.list

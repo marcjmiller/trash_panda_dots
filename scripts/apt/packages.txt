@@ -18,6 +18,7 @@ nodejs
 npm
 python3
 rofi
+signal-desktop
 software-properties-common
 unzip
 wget
