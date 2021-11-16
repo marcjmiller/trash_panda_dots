@@ -9,11 +9,11 @@
   },
   {
     "name": "Clint Harris",
-    "command": "gtk-launch Zoom.desktop 'zoommtg://zoom.us/join?confno=6374310220&pwd=TE1QRTBpU1lwK1hNNzU4Q3RRekZVdz09'"
+    "command": "gtk-launch Zoom.desktop 'zoommtg://zoomgov.com/join?confno=16187796315&pwd=eHVoU0NBUGpQUVR2RE5nSXRvcFhlUT09'"
   },
   {
     "name": "Doug Twyman",
-    "command": "gtk-launch Zoom.desktop 'zoommtg://zoom.us/join?confno=9506081290&pwd=a09KV1VmWXRPS0h3c05ORllRR2ZYZz09'"
+    "command": "gtk-launch Zoom.desktop 'zoommtg://zoomgov.com/join?confno=16018430283&pwd=aVI4QlNRQy9DYnBaZkMybmtvcnczUT09'"
   },
   {
     "name": "Lucas Pick",
@@ -21,10 +21,10 @@
   },
 	{
 		"name": "Marc Miller",
-		"command": "gtk-launch Zoom.desktop 'zoommtg://zoom.us/join?confno=7309773575&pwd=eGg1TWxjK2dMMlJoYm9henBhWHZIQT09'"
+		"command": "gtk-launch Zoom.desktop 'zoommtg://zoomgov.com/join?confno=16024283005&pwd=OENaMFRySlNiSStreDJxQ0JCVnV6Zz09'"
 	},
 	{
 		"name": "Philip Chapin",
-		"command": "gtk-launch Zoom.desktop 'zoommtg://zoom.us/join?confno=2341542041&pwd=V0FQVCtiNEFxVEg2ZkNDMEM0SUcwQT09'"
+		"command": "gtk-launch Zoom.desktop 'zoommtg://zoomgov.com/join?confno=16198022198&pwd=OC9BTXdGTkhHMmFmTGd1cWJSLzdXUT09'"
 	}
 ]
