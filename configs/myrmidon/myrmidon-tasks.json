@@ -1,11 +1,11 @@
 [
   {
     "name": "(default) Andrew Stone",
-    "command": "gtk-launch Zoom.desktop 'zoommtg://zoom.us/join?confno=99612858599&pwd=TUNOdzEzVGFMeWRFU3Fyc1VDWDF0dz09'"
+    "command": "gtk-launch Zoom.desktop 'zoommtg://zoomgov.com/join?confno=16030141019&pwd=K2pMREs4MElvcW9OREhWMFA1QmlHUT09'"
   },
   {
     "name": "Anthony Butt / Tony / Cheeks",
-    "command": "gtk-launch Zoom.desktop 'zoommtg://zoom.us/join?confno=7844951501&pwd=QXFDclN3d1lybDFkeEl0T3lPNnZOZz09'"
+    "command": "gtk-launch Zoom.desktop 'zoommtg://zoomgov.com/join?confno=16090717194&pwd=RkExNU9qZXBtQzFrWU8ybE1tRzk0Zz09'"
   },
   {
     "name": "Clint Harris",
