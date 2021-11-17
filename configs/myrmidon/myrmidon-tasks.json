@@ -17,7 +17,7 @@
   },
   {
     "name": "Lucas Pick",
-    "command": "gtk-launch Zoom.desktop 'zoommtg://zoom.us/join?confno=5976333518&pwd=cXJZL0pvK1o4K0NvL3VrcUdieXRPZz09'"
+    "command": "gtk-launch Zoom.desktop 'zoommtg://zoomgov.com/join?confno=16048431816&pwd=VllzT2pZMWxZRlFKcWJ0ejhSOUR1dz09'"
   },
 	{
 		"name": "Marc Miller",
