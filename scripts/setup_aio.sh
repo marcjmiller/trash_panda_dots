@@ -8,7 +8,7 @@ source $SCRIPT_DIR/functions.sh
 
 printf "Installing liquidctl \n"
 
-install_package(liquidctl)
+install_package("liquidctl")
 
 printf "Creating liquidcfg.service file \n"
 
