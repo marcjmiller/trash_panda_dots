@@ -1,22 +1,42 @@
 #!/bin/bash
 
 extract () {
-if [ -f "$1" ] ; then
-  case "$1" in
-    *.tar.bz2)   tar xjf "$1"     ;;
-    *.tar.gz)    tar xzf "$1"     ;;
-    *.bz2)       bunzip2 "$1"     ;;
-    *.rar)       unrar x "$1"     ;;
-    *.gz)        gunzip "$1"      ;;
-    *.tar)       tar xf "$1"      ;;
-    *.tbz2)      tar xjf "$1"     ;;
-    *.tgz)       tar xzf "$1"     ;;
-    *.zip)       unzip "$1"       ;;
-    *.Z)         uncompress "$1"  ;;
-    *.7z)        7z x "$1"        ;;
-    *)     echo "'$1' cannot be extracted via extract()" ;;
-     esac
- else
-     echo "'$1' is not a valid file"
- fi
+  if [ -f "$1" ] ; then
+    case "$1" in
+      *.tar.bz2)   tar xjf "$1"     ;;
+      *.tar.gz)    tar xzf "$1"     ;;
+      *.bz2)       bunzip2 "$1"     ;;
+      *.rar)       unrar x "$1"     ;;
+      *.gz)        gunzip "$1"      ;;
+      *.tar)       tar xf "$1"      ;;
+      *.tbz2)      tar xjf "$1"     ;;
+      *.tgz)       tar xzf "$1"     ;;
+      *.zip)       unzip "$1"       ;;
+      *.Z)         uncompress "$1"  ;;
+      *.7z)        7z x "$1"        ;;
+      *)     echo "'$1' cannot be extracted via extract()" ;;
+    esac
+  else
+      echo "'$1' is not a valid file"
+  fi
+}
+
+git_clone_group () {
+  if [ $# -eq 0 ]; then
+    echo "Usage:  git_clone_group [host_uri] [group_id] [access_token]"
+    echo ""
+    echo "Clones a group of repos into the current directory using the API, curl, and jq."
+    echo "  host_uri          Base path of the host of the repos, eg 'github.com'"
+    echo "  group_id          Group ID you wish to clone"
+    echo "  access_token      A git access token used to clone from the repo"
+    echo ""
+  else
+    host_uri = $1
+    group_id = $2
+    access_token = $3
+
+    for repo in $(curl -s --header "PRIVATE-TOKEN: $access_token" https://$host_uri/api/v4/groups/$group_id | jq ".projects[].http_url_to_repo" | tr -d '"');
+      do git clone $repo
+    done
+  fi
 }
