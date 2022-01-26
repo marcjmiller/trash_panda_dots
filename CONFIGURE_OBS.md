@@ -1,5 +1,5 @@
-
 ## Instructions for configuring OBS for greenscreen
+### Sourced from https://www.eigenmagic.com/2020/04/22/how-to-use-obs-studio-with-zoom/
 
 # Install obs-studio
 ```
@@ -49,7 +49,7 @@ cmake -DLIBOBS_INCLUDE_DIR="../../obs-studio/libobs" -DCMAKE_INSTALL_PREFIX=/usr
 make -j4
 ```
 
-## Should install to `/usr/lib/obs-plugins/` 
+## Should install to `/usr/lib/obs-plugins/`
 ```
 sudo make install
 ```
