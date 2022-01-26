@@ -1,5 +1,6 @@
 {
   "insecure-registries": [
-    "registry.gbsd.fences.dso.mil"
+    "registry.gbsd.fences.dso.mil",
+    "nexus.gbsd.fences.dso.mil"
   ]
 }
