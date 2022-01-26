@@ -25,6 +25,7 @@ function configure_applications() {
   configure_docker
   configure_neovim
   configure_vscode
+  configure_zoom
   job_done
 }
 
@@ -131,6 +132,14 @@ function configure_vscode() {
     code --install-extension "$EXT" &> /dev/null &
     get_status
   done < $SCRIPT_DIR/vscode/extensions.txt
+}
+
+function configure_zoom() {
+  new_line
+  printf " -> zoom \n"
+  printf "   -> enabling cloud switch "
+  sed -i 's/enableCloudSwitch=false/enableCloudSwitch=true/' ~/.config/zoomus.conf
+  job_done
 }
 
 
