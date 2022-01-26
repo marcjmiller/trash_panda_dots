@@ -22,4 +22,6 @@ signal-desktop
 software-properties-common
 unzip
 wget
+yq
 zsh
+skopeo
