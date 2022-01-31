@@ -54,6 +54,10 @@ function copy_configs() {
               APP_CFG_PATH=$HOME/.$CFG_FILENAME
             ;;
 
+            "zoom")
+              APP_CFG_PATH=$HOME/.config/$CFG_FILENAME
+            ;;
+
             *)
               APP_CFG_PATH=$HOME/.config/${APP_NAME}/${CFG_FILENAME}
             ;;
