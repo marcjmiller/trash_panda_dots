@@ -53,12 +53,6 @@ function main {
         PACKAGE_LIST+=( pipewire gstreamer1.0-pipewire libspa-0.2-{bluetooth,jack} pipewire-audio-client-libraries )
       ;;
 
-      -c | --cac)
-        printf " -> Setting up CAC tools \n"
-        USE_CAC=1
-        PACKAGE_LIST+=( libnss3-tools libpcsclite1 pcscd pcsc-tools opensc-pkcs11 )
-      ;;
-
       -s | --skip-apt)
         printf " -> Skipping apt functions \n"
         SKIP_APT=1

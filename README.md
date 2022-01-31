@@ -21,7 +21,6 @@ When running the bootstrap script, the script accepts some options:
 - `-v` or `--verbose`: Adds `set x` to echo every line of the file as it runs it (with variables replaced)
 - `-l` or `--laptop`: Adds `tlp` to the list of packages to install, to increase battery life for laptops
 - `-b` or `--bluetooth`: Replaces `pulseaudio` with `pipewire` to support HSP/HFP mode for bluetooth headsets
-- `-c` or `--cac`: Installs required libs for setting up a CAC
 - `-s` or `--skip-apt`: Skips all apt steps (useful for me to test things outside of apt, since `apt update` can take a hot minute)
 
 ### What this repo sets up for you
