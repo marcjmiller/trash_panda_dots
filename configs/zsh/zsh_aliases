@@ -27,3 +27,6 @@ alias fd=fdfind
 
 # Screenshot area select
 alias sshot="maim -s | xclip -selection clipboard -t image/png"
+
+# Extra git aliases
+alias gcloc="git ls-files | xargs cloc"
