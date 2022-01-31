@@ -29,4 +29,8 @@ alias fd=fdfind
 alias sshot="maim -s | xclip -selection clipboard -t image/png"
 
 # Extra git aliases
+# Count lines of code in a git repo
 alias gcloc="git ls-files | xargs cloc"
+
+# Execute git pull on children of current directory, using 5 processes
+alias gpc="find . -maxdepth 1 -type d | xargs -P5 -I{} git -C {} pull"
