@@ -15,13 +15,12 @@ SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 DOTS_DIR=$HOME/.dotfiles
 
 # Default packages to install
-PACKAGE_LIST=()
+declare -a PACKAGE_LIST
 readarray PACKAGE_LIST < $SCRIPT_DIR/apt/packages.txt
 
 # Some starter Boolean vars, 0 = false, 1 = true
 IS_LAPTOP=${IS_LAPTOP:-0}           # Whether installing on a laptop or not
 USE_BLUETOOTH=${USE_BLUETOOTH:-0}   # Whether setting up for Bluetooth with pipewire
-USE_CAC=${USE_CAC:-0}               # Whether setting up CAC
 
 # Source all of our helper scripts
 source $SCRIPT_DIR/functions.sh
@@ -86,7 +85,6 @@ function main {
   new_line
   printf "That's all folks! \n"
   new_line
-
 }
 
 trap cleanup EXIT

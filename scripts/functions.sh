@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
+declare ANSWER
+
 function setup() {
   check_os
   get_elevated_permissions
+  query_langs
   query_bluetooth
 }
 
@@ -42,11 +45,10 @@ function get_repo() {
   printf "Checking for dotfiles repository... \n"
   if [ -d "${DOTS_DIR}" ]; then
     printf " -> Dotfiles repository found skipping clone \n"
-    printf " -> Execute git pull? [y/N]  "
-    old_stty_cfg=$(stty -g)
-    stty raw -echo ; GIT_PULL=$(head -c 1) ; stty $old_stty_cfg # Careful playing with stty
-    if printf "$GIT_PULL" | grep -iq "^y" ;then
-      pushd $DOTS_DIR
+    query " -> Execute git pull? [y/N]  "
+    pushd $DOTS_DIR
+
+    if [[ $ANSWER =~ (y|Y) ]]; then
       git pull
     fi
   else
@@ -59,10 +61,8 @@ function get_repo() {
 
 function query_bluetooth() {
   if [ -z ${USE_BLUETOOTH+x} ]; then
-    printf "Will you be using a Bluetooth headset? [y/N]"
-    old_stty_cfg=$(stty -g)
-    stty raw -echo ; USE_BLUETOOTH=$(head -c 1) ; stty $old_stty_cfg # Careful playing with stty
-    if printf "$USE_BLUETOOTH" | grep -iq "^y" ;then
+    query "Will you be using a Bluetooth headset? [y/N]"
+    if [[ $ANSWER =~ (y|Y) ]]; then
       new_line
       printf " -> Adding pipewire-debian upstream ppa \n"
       sudo sh -c "add-apt-repository -y ppa:pipewire-debian/pipewire-upstream" > /dev/null
@@ -88,6 +88,50 @@ function get_elevated_permissions() {
     sleep 60;
     kill -0 "$$" || exit;
   done 2>/dev/null &
+}
+
+function query() {
+  ANSWER="n"
+  echo -e $@
+  old_stty_cfg=$(stty -g)
+  stty raw -echo ; ANSWER=$(head -c 1) ; stty $old_stty_cfg
+}
+
+function query_langs() {
+  local -a LANGS=( golang node python rust )
+  for LANG in "${LANGS[@]}"; do
+    query "Will you be developing in $LANG? [y/N]"
+    if [[ $ANSWER =~ (y|Y) ]]; then
+      printf " -> Adding $LANG dependencies to package list \n"
+      add_lang $LANG
+    fi
+  done
+}
+
+function add_lang() {
+  LANG=$1
+
+  case "$LANG" in
+    "golang")
+      PACKAGE_LIST+=( golang )
+    ;;
+
+    "node")
+      PACKAGE_LIST+=( nodejs npm )
+    ;;
+
+    "python")
+      PACKAGE_LIST+=( pipenv python3 python3-pip )
+    ;;
+
+    "rust")
+      PACKAGE_LIST+=( rust-all )
+    ;;
+
+    *)
+      continue
+    ;;
+  esac
 }
 
 function command_exists() {

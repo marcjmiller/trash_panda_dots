@@ -17,11 +17,7 @@ function config_apps() {
 function configure_applications() {
   printf "Configuring apps... \n"
   configure_appgate
-
-  if [ "$USE_CAC" -eq 1 ]; then
-    configure_brave
-  fi
-
+  configure_brave
   configure_docker
   configure_neovim
   configure_vscode

@@ -41,7 +41,7 @@ function check_stigs() {
   # The Ubuntu operating system must enforce a minimum 15-character password length.
   scanout="$(grep -i minlen /etc/security/pwquality.conf | awk '{print $3}')"
 
-  if  [[ ! "$scanout" -ge 15 ]] ;  then
+  if  [[ ! $scanout -ge 15 ]] ;  then  # fix this , error is expected an operand not -ge
     NEEDED_STIGS+=( v100589 )
   fi
 
@@ -130,6 +130,8 @@ function check_stigs() {
   if [[ "$scanout" =~ "inactive" ]] ;  then
     NEEDED_STIGS+=( v100911 )
   fi
+
+  printf $NEEDED_STIGS
 }
 
 function apply_stigs() {
@@ -243,3 +245,5 @@ v100861() {
   install_package opensc-pkcs11 &
   get_status
 }
+
+check_stigs
