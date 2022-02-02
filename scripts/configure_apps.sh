@@ -147,6 +147,7 @@ function configure_preferred_apps() {
   printf "Setting app defaults... \n"
   printf " -> kitty as default x-terminal-emulator \n"
   sudo update-alternatives --quiet --set x-terminal-emulator $(which kitty)
+  gsettings set org.gnome.desktop.default-applications.terminal exec $(which kitty)
 
   printf " -> brave-browser as default x-www-browser \n"
   sudo update-alternatives --quiet --set x-www-browser $(which brave-browser-stable)
