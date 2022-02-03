@@ -99,11 +99,11 @@ function query() {
 
 function query_langs() {
   local -a LANGS=( golang node python rust )
-  for LANG in "${LANGS[@]}"; do
-    query "Will you be developing in $LANG? [y/N]"
+  for DEV_LANG in "${LANGS[@]}"; do
+    query "Will you be developing in $DEV_LANG? [y/N]"
     if [[ $ANSWER =~ (y|Y) ]]; then
-      printf " -> Adding $LANG dependencies to package list \n"
-      add_lang $LANG
+      printf " -> Adding $DEV_LANG dependencies to package list \n"
+      add_lang $DEV_LANG
     fi
   done
 }
