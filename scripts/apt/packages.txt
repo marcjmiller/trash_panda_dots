@@ -8,7 +8,9 @@ curl
 docker-ce
 docker-ce-cli
 fzf
+gimp
 gnupg
+inkscape
 jq
 kitty
 kubectl
