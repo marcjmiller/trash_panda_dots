@@ -25,7 +25,7 @@ function check_stigs() {
   # The Ubuntu operating system must be configured to preserve log records from failure events.
   scanout="$(dpkg -l | grep rsyslog | awk '{print $2}')"
 
-  if [ -z "$scanout" ] || [[ "$scanout" != "rsyslog" ]] ;  then
+  if [ -z "$scanout" ] || [[ "$scanout" != "rsyslog" ]];  then
     NEEDED_STIGS+=( v100547 )
   fi
 
@@ -39,9 +39,9 @@ function check_stigs() {
 
   ########## v100589 ##########
   # The Ubuntu operating system must enforce a minimum 15-character password length.
-  scanout="$(grep -i minlen /etc/security/pwquality.conf | awk '{print $3}')"
-
-  if  [[ ! $scanout -ge 15 ]] ;  then  # fix this , error is expected an operand not -ge
+  scanout="$(grep -is minlen /etc/security/pwquality.conf | awk '{print $3}')"
+  scanout+=0
+  if  [[ ! $scanout -ge 15 ]];  then  # fix this , error is expected an operand not -ge
     NEEDED_STIGS+=( v100589 )
   fi
 
@@ -64,7 +64,7 @@ function check_stigs() {
   fi
 
   ########## v100839 ##########
-  # The Ubuntu Operating system must disable the x86 Ctrl-Alt-Delete key sequence.
+  # The Ubuntu operating system must enforce SSHv2 for network access to all accounts.
   scanout="$(grep ^Protocol /etc/ssh/sshd_config)"
 
   if [ -z "$scanout" ] || [[ "$scanout" != "Protocol 2" ]];  then
@@ -94,7 +94,7 @@ function check_stigs() {
   # information unless otherwise protected by alternative physical safeguards, such as, at a minimum, a Protected Distribution System (PDS).
   scanout="$(dpkg -l | grep openssh | awk '{print $2}')"
 
-  if [[ ! "$scanout" =~ "openssh" ]] ;  then
+  if [[ ! "$scanout" =~ "openssh" ]];  then
     NEEDED_STIGS+=( v100849 )
   fi
 
@@ -103,7 +103,7 @@ function check_stigs() {
   scanout="$( grep "^PermitEmptyPasswords" /etc/ssh/sshd_config)"
   scanout2="$( grep "^PermitUserEnvironment" /etc/ssh/sshd_config)"
 
-  if [[ "$scanout" != "PermitEmptyPasswords no" ]] && [[ "$scanout2" != "PermitUserEnvironment no" ]] ;  then
+  if [[ "$scanout" != "PermitEmptyPasswords no" ]] && [[ "$scanout2" != "PermitUserEnvironment no" ]];  then
     NEEDED_STIGS+=( v100851 )
   fi
 
@@ -120,14 +120,14 @@ function check_stigs() {
   # The Ubuntu operating system must accept Personal Identity Verification (PIV) credentials..
   scanout="$(dpkg -l | grep opensc-pkcs11 | awk '{print $2}')"
 
-  if [ -z "$scanout" ] || [[ ! "$scanout" =~ "opensc-pkcs11" ]] ;  then
+  if [ -z "$scanout" ] || [[ ! "$scanout" =~ "opensc-pkcs11" ]];  then
     NEEDED_STIGS+=( v100861 )
   fi
 
   ########## v100911 ##########
   # The Ubuntu operating system must have an application firewall enabled.
   scanout="$(sudo systemctl status ufw.service | grep -i "active:")"
-  if [[ "$scanout" =~ "inactive" ]] ;  then
+  if [[ "$scanout" =~ "inactive" ]];  then
     NEEDED_STIGS+=( v100911 )
   fi
 
