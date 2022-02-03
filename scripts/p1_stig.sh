@@ -142,41 +142,41 @@ function apply_stigs() {
   done
 }
 
-v100539() {
+function v100539() {
   # The Ubuntu operating system must not have the Network Information Service (NIS) package installed.
   printf "     -> removing nis..."
   sudo apt-get -qq remove nis &
   get_status
 }
 
-v100541() {
+function v100541() {
   # The Ubuntu operating system must not have the rsh-server package installed.
   printf "     -> removing rsh-server..."
   sudo apt-get -qq remove rsh-server &
   get_status
 }
 
-v100581() {
+function v100581() {
   # The Ubuntu operating system must not have the telnet package installed.
   printf "     -> removing telnetd..."
   sudo apt-get -qq remove telnetd &
   get_status
 }
 
-v100589() {
+function v100589() {
   # The Ubuntu operating system must enforce a minimum 15-character password length.
   # If "minlen" parameter value is not 15 or higher, or is commented out, this is a finding.
   sudo sed -i 's/.*minlen =.*/minlen = 15/g' /etc/security/pwquality.conf
 }
 
-v100607() {
+function v100607() {
   # The /var/log directory must be owned by root.
   # The  /var/log directory must be group-owned by root.
   # If the /var/log directory is not owned by root, this is a finding.
   sudo chown root:root /var/log
 }
 
-v100651() {
+function v100651() {
   # The Ubuntu Operating system must disable the x86 Ctrl-Alt-Delete key sequence.
   # Configure the system to disable the Ctrl-Alt-Delete sequence for the command line with the following command:
   sudo systemctl disable ctrl-alt-del.target
@@ -184,13 +184,13 @@ v100651() {
   sudo systemctl daemon-reload
 }
 
-v100837() {
+function v100837() {
   # Ubuntu operating system must implement DoD-approved encryption to protect the confidentiality of remote access sessions.
   sudo echo "Ciphers aes128-ctr,aes192-ctr,aes256-ctr" >> /etc/ssh/sshd_config
   sudo systemctl restart sshd.service
 }
 
-v100839() {
+function v100839() {
   # The Ubuntu operating system must enforce SSHv2 for network access to all accounts.
   # Configure the Ubuntu operating system to enforce SSHv2 for network access to all accounts.
   # Add or update the following line in the "/etc/ssh/sshd_config" file
@@ -198,7 +198,7 @@ v100839() {
   sudo systemctl restart sshd.service
 }
 
-v100845() {
+function v100845() {
   # The Ubuntu operating system must immediately terminate all network connections associated with
   # SSH traffic at the end of the session or after 10 minutes of inactivity.
   sudo sed -i 's/.*ClientAliveInterval .*/ClientAliveInterval 600/g' /etc/ssh/sshd_config
@@ -206,7 +206,7 @@ v100845() {
 }
 
 
-v100847() {
+function v100847() {
   # The Ubuntu operating system must configure the SSH daemon to only use Message Authentication Codes (MACs)
   # employing FIPS 140-2 approved cryptographic hash algorithms to protect the integrity of nonlocal maintenance and diagnostic communications.
   sudo echo "MACs hmac-sha2-256,hmac-sha2-512" >> /etc/ssh/sshd_config
@@ -214,7 +214,7 @@ v100847() {
 }
 
 
-v100849() {
+function v100849() {
   # The Ubuntu operating system must use SSH to protect the confidentiality and integrity of transmitted information unless otherwise protected
   # by alternative physical safeguards, such as, at a minimum, a Protected Distribution System (PDS).
   printf "     -> Installing ssh..."
@@ -224,14 +224,14 @@ v100849() {
   sudo systemctl start sshd.service
 }
 
-v100851 () {
+function v100851 () {
   # The Ubuntu operating system must not allow unattended or automatic login via ssh.
   sudo sed -i 's/.*PermitEmptyPasswords .*/PermitEmptyPasswords no/g' /etc/ssh/sshd_config
   sudo sed -i 's/.*PermitUserEnvironment .*/PermitUserEnvironment no/g' /etc/ssh/sshd_config
   sudo sudo systemctl restart sshd.service
 }
 
-v100855() {
+function v100855() {
   # The Ubuntu operating system must not allow unattended or automatic login via ssh.
   printf "     -> Installing libpam-pkcs11..."
   install_package libpam-pkcs11 &
@@ -239,11 +239,9 @@ v100855() {
   echo "use_mappers=pwent" | sudo tee /etc/pam_pkcs11/pam_pkcs11.conf &> /dev/null
 }
 
-v100861() {
+function v100861() {
   # The Ubuntu operating system must accept Personal Identity Verification (PIV) credentials.
   printf "     -> Installing opensc-pkcs11..."
   install_package opensc-pkcs11 &
   get_status
 }
-
-check_stigs
