@@ -6,6 +6,7 @@ function install_tools() {
   install_kind
   install_kustomize
   install_myrmidon
+  install_yq
   job_done
 }
 
@@ -96,4 +97,11 @@ function install_myrmidon() {
     git clone -q https://github.com/moustacheful/myrmidon.git $HOME/scripts/myrmidon &
     get_status
   fi
+}
+
+function install_yq() {
+  printf " -> Installing yq..."
+  sudo sh -c "curl -flLso /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64"
+  sudo sh -c "chmod a+x /usr/local/bin/yq" &
+  get_status
 }

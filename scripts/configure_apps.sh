@@ -139,8 +139,8 @@ function configure_keybinds() {
   new_line
   printf " -> dconf (keybindings) \n"
   printf "   -> Adding custom keybinds..."
-  sed -i "s/CHANGEME_USER/$(whoami)/" ${CONFIG_DIR}/dconf/keybindings.conf
-  sh -c "dconf load /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/ < ${CONFIG_DIR}/dconf/keybindings.conf" &
+  sed -i "s/CHANGEME_USER/$(whoami)/" ${CONFIGS_DIR}/dconf/keybindings.conf
+  sh -c "dconf load /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/ < ${CONFIGS_DIR}/dconf/keybindings.conf" &
   get_status
 }
 

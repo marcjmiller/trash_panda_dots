@@ -24,5 +24,4 @@ skopeo
 software-properties-common
 unzip
 wget
-yq
 zsh
