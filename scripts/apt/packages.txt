@@ -26,6 +26,8 @@ skopeo
 software-properties-common
 sshuttle
 vagrant
+virtualbox
+virtualbox-ext-pack
 unzip
 wget
 zsh

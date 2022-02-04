@@ -48,6 +48,7 @@ When running the bootstrap script, the script accepts some options:
 - sshuttle
 - teams
 - vagrant
+- virtualbox
 - vs code
 - zoom
 - zsh
