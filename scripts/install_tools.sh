@@ -1,5 +1,6 @@
 function install_tools() {
   printf "Installing tools \n"
+  install_ansible
   install_docker_compose
   install_helm
   install_k3d
@@ -8,6 +9,19 @@ function install_tools() {
   install_myrmidon
   install_yq
   job_done
+}
+
+function install_ansible() {
+  if [ $(command_exists ansible) -eq 0 ]; then
+    printf " -> Installing ansible..."
+    sudo sh -c "apt-add-repository ppa:ansible/ansible"
+
+    install_package ansible &
+    get_status
+  else
+    printf " -> Found docker-compose, skipping..."
+    success
+  fi
 }
 
 function install_docker_compose() {
