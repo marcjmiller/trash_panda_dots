@@ -4,7 +4,7 @@
 The purpose of this repo is to quickly configure a new machine for use by DevSecOps Engineers. For a list of packages installed by this script, see `./scripts/packages.txt` which is read into an array during script execution.
 
 ### Prerequisites
-- System must be running Ubuntu 20.04 or 21.04 (or some variant of those releases)
+- System must be running Ubuntu 20.04, 21.04, 21.10 (or some variant of those releases)
 
 ### Installation
 1. (Optional) Set environment variables for `GIT_EMAIL` and `GIT_USERNAME`. If not set, the script will ask for them
