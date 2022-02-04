@@ -25,6 +25,7 @@ When running the bootstrap script, the script accepts some options:
 
 ### What this repo sets up for you
 - appgate sdp
+- aws cli
 - brave-browser
 - discord
 - docker

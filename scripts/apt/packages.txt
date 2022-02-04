@@ -1,5 +1,6 @@
 apt-utils
 apt-transport-https
+awscli
 brave-browser
 ca-certificates
 code
