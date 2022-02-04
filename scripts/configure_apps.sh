@@ -11,6 +11,7 @@ function config_apps() {
   fi
   configure_preferred_apps
   configure_keyboard
+  configure_mouse
 
   apply_p1_stig
 }
@@ -131,7 +132,7 @@ function configure_brave() {
   printf " -> brave-browser \n"
   sh -c "mkdir -p $HOME/.pki/nssdb"
   sh -c "certutil -d $HOME/.pki/nssdb -N --empty-password"
-  sh -c "modutil -dbdir sql:$HOME/.pki/nssdb/ -list"
+  # sh -c "modutil -dbdir sql:$HOME/.pki/nssdb/ -list"
   sh -c "modutil -dbdir sql:$HOME/.pki/nssdb/ -add \"CAC Module\" -libfile $(whereis opensc-pkcs11.so) -force"
 }
 
@@ -207,6 +208,17 @@ function configure_keyboard() {
   job_done
 
   configure_keyboard_shortcuts
+}
+
+function configure_mouse() {
+  query "Use natural scrolling? [y/N]"
+  if [[ $ANSWER =~ (y|Y) ]]; then
+    printf " -> Setting natural scrolling! \n"
+    gsettings set org.gnome.desktop.peripherals.mouse natural-scroll true
+  else
+    printf " -> No changes made. \n"
+  fi
+  job_done
 }
 
 function apply_p1_stig() {
