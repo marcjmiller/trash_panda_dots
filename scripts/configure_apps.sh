@@ -1,6 +1,7 @@
 
 function config_apps() {
   copy_configs
+  # get_dod_certs # ****** WORK IN PROGRESS ******
   configure_applications
   if [ ${USE_BLUETOOTH} -eq 1 ]; then
     systemctl --user daemon-reload
@@ -19,6 +20,7 @@ function configure_applications() {
   configure_appgate
   configure_brave
   configure_docker
+  configure_keybinds
   configure_neovim
   configure_vscode
   configure_zoom
@@ -26,11 +28,13 @@ function configure_applications() {
 }
 
 function copy_configs() {
+  declare -a SKIP_COPY
+  SKIP_COPY=( dconf zsh )
   printf "Copying app configs... \n"
   for APP in ${DOTS_DIR}/configs/*; do
     APP_NAME=$(basename ${APP})
 
-    if [ "${APP_NAME}" != "zsh" ]; then
+    if [[ ! ${SKIP_COPY[*]} =~ ${APP_NAME} ]]; then
       printf " -> %s \n" "$APP_NAME"
 
       for CFG in $APP/*; do
@@ -93,6 +97,29 @@ function copy_configs() {
   job_done
 }
 
+#  ****** WORK IN PROGRESS ******
+# function get_dod_certs() {
+#   # https://dl.dod.cyber.mil/wp-content/uploads/pki-pke/zip/certificates_pkcs7_DoD.zip
+#   new_line
+#   pushd /tmp
+#     printf " -> grabbing DoD Certs "
+#     curl -fsSLO https://dl.dod.cyber.mil/wp-content/uploads/pki-pke/zip/certificates_pkcs7_DoD.zip &
+#     get_status
+#     CERT_DIR=$(unzip certificates_pkcs7_DoD.zip | grep creating | awk '{ print $2 }')
+#     pushd $CERT_DIR
+#       PEMFILE=$(ls ./Certificates*pem*)
+#       CERT_NAME="DoD Certs"
+#       SYS_CERT_DIR="/usr/local/share/ca-certificates/extra"
+#       printf "   -> adding DoD certs to system "
+#       sudo sh -c "mkdir -p $SYS_CERT_DIR"
+#       sudo sh -c "cp $PEMFILE $SYS_CERT_DIR"
+#       sudo sh -c "update-ca-certificates" &
+#       get_status
+#     popd
+#   popd
+# }
+#  ****** WORK IN PROGRESS ******
+
 function configure_appgate() {
   new_line
   printf " -> appgate \n"
@@ -106,6 +133,15 @@ function configure_brave() {
   sh -c "certutil -d $HOME/.pki/nssdb -N --empty-password"
   sh -c "modutil -dbdir sql:$HOME/.pki/nssdb/ -list"
   sh -c "modutil -dbdir sql:$HOME/.pki/nssdb/ -add \"CAC Module\" -libfile $(whereis opensc-pkcs11.so) -force"
+}
+
+function configure_keybinds() {
+  new_line
+  printf " -> dconf (keybindings) \n"
+  printf "   -> Adding custom keybinds..."
+  sed -i "s/CHANGEME_USER/$(whoami)/" ${CONFIG_DIR}/dconf/keybindings.conf
+  sh -c "dconf load /org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/ < ${CONFIG_DIR}/dconf/keybindings.conf" &
+  get_status
 }
 
 function configure_neovim() {
@@ -160,22 +196,14 @@ function configure_preferred_apps() {
 }
 
 function configure_keyboard() {
-  while true; do
-    read -p "Set faster keyboard key repeat/shorter delay? [y/N]: " yn
-    case "$yn" in
-      [Yy]*)
-        printf " -> Faster keyboard key repeat/shorter delay set! \n"
-        gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
-        gsettings set org.gnome.desktop.peripherals.keyboard delay 280
-        break
-      ;;
-
-      *)
-        printf " -> No changes made. \n"
-        break
-      ;;
-      esac
-  done
+  query "Set faster keyboard key repeat/shorter delay? [y/N]"
+  if [[ $ANSWER =~ (y|Y) ]]; then
+    printf " -> Faster keyboard key repeat/shorter delay set! \n"
+    gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 20
+    gsettings set org.gnome.desktop.peripherals.keyboard delay 280
+  else
+    printf " -> No changes made. \n"
+  fi
   job_done
 
   configure_keyboard_shortcuts

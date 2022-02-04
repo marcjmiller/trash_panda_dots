@@ -13,6 +13,7 @@ GIT_USERNAME=${GIT_USERNAME:-CHANGEME_USERNAME}
 # Paths
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 DOTS_DIR=$HOME/.dotfiles
+CONFIGS_DIR=$DOTS_DIR/configs
 
 # Default packages to install
 declare -a PACKAGE_LIST
