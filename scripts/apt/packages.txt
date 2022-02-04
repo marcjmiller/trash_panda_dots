@@ -1,3 +1,4 @@
+ansible
 apt-utils
 apt-transport-https
 awscli
@@ -17,6 +18,7 @@ kitty
 kubectl
 libnss3-tools
 neovim
+packer
 pcsc-tools
 pcscd
 rofi

@@ -25,6 +25,7 @@ When running the bootstrap script, the script accepts some options:
 
 ### What this repo sets up for you
 - appgate sdp
+- ansible
 - aws cli
 - brave-browser
 - discord
@@ -40,6 +41,7 @@ When running the bootstrap script, the script accepts some options:
 - mattermost-desktop
 - neovim (vi/vim alternative)
 - ohmyzsh (terminal plugins)
+- packer
 - Platform One STIGs
 - rofi
 - slack
