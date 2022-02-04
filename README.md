@@ -25,9 +25,9 @@ When running the bootstrap script, the script accepts some options:
 
 ### What this repo sets up for you
 - appgate sdp
-- ansible
 - aws cli
 - brave-browser
+- copyq
 - discord
 - docker
 - fzf (CLI fuzzy finder)
@@ -40,12 +40,14 @@ When running the bootstrap script, the script accepts some options:
 - kustomize
 - mattermost-desktop
 - neovim (vi/vim alternative)
+- net-tools
 - ohmyzsh (terminal plugins)
-- packer
 - Platform One STIGs
 - rofi
 - slack
+- sshuttle
 - teams
+- vagrant
 - vs code
 - zoom
 - zsh

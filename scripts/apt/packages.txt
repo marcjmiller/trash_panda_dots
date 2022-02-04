@@ -1,10 +1,10 @@
-ansible
 apt-utils
 apt-transport-https
 awscli
 brave-browser
 ca-certificates
 code
+copyq
 containerd.io
 curl
 docker-ce
@@ -18,12 +18,14 @@ kitty
 kubectl
 libnss3-tools
 neovim
-packer
+net-tools
 pcsc-tools
 pcscd
 rofi
 skopeo
 software-properties-common
+sshuttle
+vagrant
 unzip
 wget
 zsh
