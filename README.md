@@ -29,18 +29,17 @@ When running the bootstrap script, the script accepts some options:
 - discord
 - docker
 - fzf (CLI fuzzy finder)
-- kubectl
-- kustomize
+- gimp (image editor)
 - git
 - helm
+- inkscape (vector images)
+- kitty (GPU-accelerated terminal)
+- kubectl
+- kustomize
 - mattermost-desktop
-- maven
 - neovim (vi/vim alternative)
-- nodejs
-- npm
-- ohmyzsh (and plugins)
+- ohmyzsh (terminal plugins)
 - Platform One STIGs
-- python3
 - rofi
 - slack
 - teams

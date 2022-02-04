@@ -19,7 +19,6 @@ neovim
 pcsc-tools
 pcscd
 rofi
-signal-desktop
 skopeo
 software-properties-common
 unzip
