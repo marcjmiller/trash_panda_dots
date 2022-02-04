@@ -223,7 +223,7 @@ function v100849() {
   sudo systemctl start sshd.service
 }
 
-function v100851 () {
+function v100851() {
   # The Ubuntu operating system must not allow unattended or automatic login via ssh.
   sudo sed -i 's/.*PermitEmptyPasswords .*/PermitEmptyPasswords no/g' /etc/ssh/sshd_config
   sudo sed -i 's/.*PermitUserEnvironment .*/PermitUserEnvironment no/g' /etc/ssh/sshd_config
