@@ -40,7 +40,7 @@ function check_stigs() {
   ########## v100589 ##########
   # The Ubuntu operating system must enforce a minimum 15-character password length.
   scanout="$(grep -is minlen /etc/security/pwquality.conf | awk '{print $3}')"
-  if  [[ -z $scanout ]] || [[ $scanout -lt 15 ]];  then  # fix this , error is expected an operand not -ge
+  if  [[ -z "$scanout" ]] || [[ "$scanout" =~ "=" ]] || [[ $scanout -lt 15 ]];  then
     NEEDED_STIGS+=( v100589 )
   fi
 
