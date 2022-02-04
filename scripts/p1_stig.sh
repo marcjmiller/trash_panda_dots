@@ -40,8 +40,7 @@ function check_stigs() {
   ########## v100589 ##########
   # The Ubuntu operating system must enforce a minimum 15-character password length.
   scanout="$(grep -is minlen /etc/security/pwquality.conf | awk '{print $3}')"
-  scanout+=0
-  if  [[ ! $scanout -ge 15 ]];  then  # fix this , error is expected an operand not -ge
+  if  [[ -z $scanout ]] || [[ $scanout -lt 15 ]];  then  # fix this , error is expected an operand not -ge
     NEEDED_STIGS+=( v100589 )
   fi
 
@@ -100,8 +99,8 @@ function check_stigs() {
 
   ########## v100851 ##########
   # The Ubuntu operating system must not allow unattended or automatic login via ssh.
-  scanout="$( grep "^PermitEmptyPasswords" /etc/ssh/sshd_config)"
-  scanout2="$( grep "^PermitUserEnvironment" /etc/ssh/sshd_config)"
+  scanout="$(grep "^PermitEmptyPasswords" /etc/ssh/sshd_config)"
+  scanout2="$(grep "^PermitUserEnvironment" /etc/ssh/sshd_config)"
 
   if [[ "$scanout" != "PermitEmptyPasswords no" ]] && [[ "$scanout2" != "PermitUserEnvironment no" ]];  then
     NEEDED_STIGS+=( v100851 )
