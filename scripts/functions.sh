@@ -109,9 +109,9 @@ function query_langs() {
 }
 
 function add_lang() {
-  LANG=$1
+  DEV_LANG=$1
 
-  case "$LANG" in
+  case "$DEV_LANG" in
     "golang")
       PACKAGE_LIST+=( golang )
     ;;

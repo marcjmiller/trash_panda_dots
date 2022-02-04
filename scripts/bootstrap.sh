@@ -67,7 +67,7 @@ function main {
 
   ### General Setup ###
   setup
-  get_repo
+  # get_repo # TODO: This is for when we do this as a one-shot, which will come later.
 
   if [ -z "${SKIP_APT+x}" ]; then
     install_apt
