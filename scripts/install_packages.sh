@@ -16,11 +16,18 @@ function install_apt {
       success
     else
       printf " -> Installing %s ... " "$PACKAGE"
+      if [[ $PACKAGE =~ "virtualbox-ext-pack" ]]; then
+        add_vbox_license_accept
+      fi
       install_package "${PACKAGE}" &
       get_status
     fi
   done
   job_done
+}
+
+function add_vbox_license_accept {
+  echo virtualbox-ext-pack virtualbox-ext-pack/license select true |sudo debconf-set-selections
 }
 
 function add_gpg_keys() { # TODO: Use a for-loop here to do them one-by-one with statuses for better output

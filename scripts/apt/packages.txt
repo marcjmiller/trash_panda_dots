@@ -7,6 +7,7 @@ code
 copyq
 containerd.io
 curl
+debconf-utils
 docker-ce
 docker-ce-cli
 fzf
