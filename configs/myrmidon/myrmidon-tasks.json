@@ -13,7 +13,7 @@
   },
   {
     "name": "Doug Twyman",
-    "command": "gtk-launch Zoom.desktop 'zoommtg://zoomgov.com/join?confno=16018430283&pwd=aVI4QlNRQy9DYnBaZkMybmtvcnczUT09'"
+    "command": "gtk-launch Zoom.desktop 'zoommtg://zoomgov.com/join?confno=16018430283&pwd=TkpTN2NMU3dkeHBEQm1TTzVlOEZlZz09'"
   },
   {
     "name": "Lucas Pick",
