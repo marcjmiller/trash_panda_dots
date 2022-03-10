@@ -18,6 +18,7 @@ jq
 kitty
 kubectl
 libnss3-tools
+meld
 neovim
 net-tools
 pcsc-tools
