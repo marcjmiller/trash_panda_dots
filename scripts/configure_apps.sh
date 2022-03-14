@@ -7,7 +7,9 @@ function config_apps() {
     systemctl --user daemon-reload
     systemctl --user --now disable pulseaudio.{service,socket}
     systemctl --user mask pulseaudio
-    systemctl --user --now enable pipewire-media-session.service
+    sudo cp -vRa /usr/share/pipewire /etc/
+    systemctl --user --now enable pipewire{,pulse}.{socket,service}
+    systemctl --user --now enable wireplumber.service
   fi
   configure_preferred_apps
   configure_keyboard

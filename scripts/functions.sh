@@ -67,8 +67,11 @@ function query_bluetooth() {
       printf " -> Adding pipewire-debian upstream ppa \n"
       sudo sh -c "add-apt-repository -y ppa:pipewire-debian/pipewire-upstream" > /dev/null
       new_line
+      printf " -> Adding wireplumber upstream ppa \n"
+      sudo sh -c "add-apt-repository -y ppa:pipewire-debian/wireplumber-upstream" > /dev/null
+      new_line
       printf " -> Adding pipewire and dependencies to package list \n"
-      PACKAGE_LIST=( ${PACKAGE_LIST[@]} pipewire gstreamer1.0-pipewire libspa-0.2-{bluetooth,jack} pipewire-audio-client-libraries )
+      PACKAGE_LIST=( ${PACKAGE_LIST[@]} libfdk-aac2 libldacbt-{abr,enc}2 libopenaptx0 gstreamer1.0-pipewire libpipewire-0.3-{0,dev,modules} libspa-0.2-{bluetooth,dev,jack,modules} pipewire{,-{audio-client-libraries,pulse,bin,locales,tests}} pipewire-doc wireplumber{,-doc} gir1.2-wp-0.4 libwireplumber-0.4-{0,dev} )
       USE_BLUETOOTH=1
     else
       new_line
