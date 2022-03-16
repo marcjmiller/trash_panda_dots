@@ -34,3 +34,6 @@ alias gcloc="git ls-files | xargs cloc"
 
 # Execute git pull on children of current directory, using 5 processes
 alias gpc="find . -maxdepth 1 -type d | xargs -P5 -I{} git -C {} pull"
+
+# Watch be trolling
+alias watch='watch '
