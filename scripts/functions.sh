@@ -105,7 +105,7 @@ function query_langs() {
   for DEV_LANG in "${LANGS[@]}"; do
     query "Will you be developing in $DEV_LANG? [y/N]"
     if [[ $ANSWER =~ (y|Y) ]]; then
-      printf " -> Adding $DEV_LANG dependencies to package list \n"
+      printf " -> Adding $DEV_LANG \n"
       add_lang $DEV_LANG
     fi
   done
@@ -120,7 +120,9 @@ function add_lang() {
     ;;
 
     "node")
-      PACKAGE_LIST+=( nodejs npm )
+      PACKAGE_LIST+=( npm )
+      sh -c "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash"
+      sh -c "nvm install 16 && nvm use 16"
     ;;
 
     "python")
