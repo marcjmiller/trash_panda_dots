@@ -11,3 +11,5 @@
 	defaultBranch = main
 [core]
   excludesFile = ~/.gitignore
+[commit]
+        gpgsign = true
