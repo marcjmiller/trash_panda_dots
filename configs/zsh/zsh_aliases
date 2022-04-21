@@ -37,3 +37,6 @@ alias gpc="find . -maxdepth 1 -type d | xargs -P5 -I{} git -C {} pull"
 
 # Watch be trolling
 alias watch='watch '
+
+# You know why
+alias fuck="sudo !!"
