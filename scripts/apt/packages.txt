@@ -3,6 +3,7 @@ apt-transport-https
 awscli
 brave-browser
 ca-certificates
+cloc
 code
 copyq
 containerd.io
