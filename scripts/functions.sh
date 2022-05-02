@@ -10,7 +10,7 @@ function setup() {
 }
 
 check_os() {
-  local VALID_RELEASES=( 20.04 21.04 21.10 )
+  local VALID_RELEASES=( 20.04 21.04 21.10 22.04 )
   DIST="$(lsb_release -is)"
   VERSION="$(lsb_release -rs)"
   CODENAME="$(lsb_release -cs)"
