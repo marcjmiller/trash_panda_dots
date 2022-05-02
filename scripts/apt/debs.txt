@@ -1,4 +1,4 @@
-Appgate-SDP,appgate,https://bin.appgate-sdp.com/5.4/client/appgate-sdp_5.4.3_amd64.deb
+Appgate-SDP,appgate,https://bin.appgate-sdp.com/5.5/client/appgate-sdp_5.5.4_amd64.deb
 Discord,discord,https://dl.discordapp.net/apps/linux/0.0.17/discord-0.0.17.deb
 Mattermost,mattermost-desktop,MATTERMOST_DL_URL
 Slack,slack,https://downloads.slack-edge.com/releases/linux/4.23.0/prod/x64/slack-desktop-4.23.0-amd64.deb
