@@ -1,6 +1,6 @@
 function install_tools() {
   printf "Installing tools \n"
-  install_ansible
+  # install_ansible
   install_docker_compose
   install_helm
   install_k3d

@@ -61,11 +61,11 @@ function add_apt_sources() {
 }
 
 function install_debs() {
-  printf "Getting deb-file download links... \n"
-  printf " -> Mattermost ... "
-  MATTERMOST_DL_URL=$(curl -s https://api.github.com/repos/mattermost/desktop/releases/latest | jq '.assets[].browser_download_url' | grep amd64 | tr -d '"')
-  printf "${MATTERMOST_DL_URL} \n"
-  sed -i 's|MATTERMOST_DL_URL|'"${MATTERMOST_DL_URL}"'|g' $SCRIPT_DIR/apt/debs.txt
+  # printf "Getting deb-file download links... \n"
+# printf " -> Mattermost ... "
+#   MATTERMOST_DL_URL=$(curl -s https://api.github.com/repos/mattermost/desktop/releases/latest | jq '.assets[].browser_download_url' | grep amd64 | tr -d '"')
+#   printf "${MATTERMOST_DL_URL} \n"
+#   sed -i 's|MATTERMOST_DL_URL|'"${MATTERMOST_DL_URL}"'|g' $SCRIPT_DIR/apt/debs.txt
 
   printf "Installing packages from .deb files... \n"
   download_debs

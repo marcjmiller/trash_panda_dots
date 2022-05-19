@@ -134,8 +134,7 @@ function configure_brave() {
   printf " -> brave-browser \n"
   sh -c "mkdir -p $HOME/.pki/nssdb"
   sh -c "certutil -d $HOME/.pki/nssdb -N --empty-password"
-  # sh -c "modutil -dbdir sql:$HOME/.pki/nssdb/ -list"
-  sh -c "modutil -dbdir sql:$HOME/.pki/nssdb/ -add \"CAC Module\" -libfile $(whereis opensc-pkcs11.so) -force"
+  sh -c "modutil -dbdir sql:$HOME/.pki/nssdb/ -add \"CAC Module\" -libfile opensc-pkcs11.so -force"
 }
 
 function configure_keybinds() {

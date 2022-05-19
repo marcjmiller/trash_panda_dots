@@ -19,9 +19,11 @@ jq
 kitty
 kubectl
 libnss3-tools
+libpcsclite1
 meld
 neovim
 net-tools
+opensc-pkcs11
 pcsc-tools
 pcscd
 rofi
