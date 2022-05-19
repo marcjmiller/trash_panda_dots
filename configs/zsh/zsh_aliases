@@ -14,9 +14,9 @@ alias omz="vi ~/.oh-my-zsh"
 alias reload="source ~/.zshrc"
 
 # Apt-get aliases
-alias agu="sudo apt-get update && apt list --upgradable"
-alias agi="sudo apt-get install -y"
-alias agd="sudo apt-get dist-upgrade"
+alias agu="sudo apt-get -qq update && apt list --upgradable"
+alias agi="sudo apt-get -qq install -y"
+alias agd="sudo apt-get -qq full-upgrade -y"
 alias ags="sudo apt search"
 alias afs="sudo apt-file search"
 alias alu="apt list --upgradable"

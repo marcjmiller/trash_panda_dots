@@ -30,6 +30,7 @@ oderwat.indent-rainbow
 platformio.platformio-ide
 redhat.vscode-yaml
 rogalmic.bash-debug
+s-nlf-fh.glassit
 Shelex.vscode-cy-helper
 sldobri.daily
 streetsidesoftware.code-spell-checker
