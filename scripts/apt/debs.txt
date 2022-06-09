@@ -1,5 +1,5 @@
 Appgate-SDP,appgate,https://bin.appgate-sdp.com/5.5/client/appgate-sdp_5.5.4_amd64.deb
-Discord,discord,https://dl.discordapp.net/apps/linux/0.0.17/discord-0.0.17.deb
+Discord,discord,https://dl.discordapp.net/apps/linux/0.0.18/discord-0.0.18.deb
 Slack,slack,https://downloads.slack-edge.com/releases/linux/4.23.0/prod/x64/slack-desktop-4.23.0-amd64.deb
 Teams,teams,https://packages.microsoft.com/repos/ms-teams/pool/main/t/teams/teams_1.4.00.26453_amd64.deb
 Zoom,zoom,https://www.zoomgov.com/client/latest/zoom_amd64.deb
